@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ExternalLink, Search, X } from "lucide-react";
+import { ExternalLink, FileText, Search, X } from "lucide-react";
 import { CREDENTIALS, type Credential } from "@/data/credentials";
 import { Placeholder } from "./ui";
 
@@ -9,23 +9,143 @@ const hideDrafts = process.env.NODE_ENV === "production" && process.env.NEXT_PUB
 
 function Detail({ c, onClose }: { c: Credential; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
-  useEffect(() => { ref.current?.showModal(); }, []);
+
+  useEffect(() => {
+    ref.current?.showModal();
+  }, []);
+
   return (
-    <dialog ref={ref} aria-labelledby="cred-h" onClose={onClose} onClick={(e) => e.target === ref.current && onClose()} className="w-[min(92vw,36rem)] rounded-2xl border border-accent/50 bg-surface p-0 text-ink shadow-neon backdrop:bg-black/70">
-      <div className="p-6">
-        <div className="flex items-start justify-between gap-4"><h3 id="cred-h" className="text-xl font-bold">{c.title}</h3><button onClick={onClose} aria-label="Close credential details" className="rounded-lg p-1 hover:bg-surface2"><X className="h-5 w-5" /></button></div>
-        <p className="mt-1 text-sm text-muted">{c.issuer}</p>
-        <div className="mt-3 flex flex-wrap gap-2"><span className="chip">{c.type}</span><span className="chip">{c.category}</span>
-          {c.status === "draft" ? <span className="badge border-warn/50 text-warn">Draft — details to confirm</span> : <span className="badge border-good/50 text-good">Details confirmed</span>}</div>
-        <dl className="mt-4 space-y-1 text-sm">
-          <div><dt className="inline text-muted">Issue date: </dt><dd className="inline">{c.issueDate ?? "Not provided yet"}</dd></div>
-          <div><dt className="inline text-muted">Skills: </dt><dd className="inline">{c.skills.join(", ")}</dd></div>
+    <dialog
+      ref={ref}
+      aria-labelledby="cred-h"
+      onClose={onClose}
+      onClick={(e) => e.target === ref.current && onClose()}
+      className="w-[min(94vw,48rem)] max-h-[90vh] overflow-y-auto rounded-2xl border border-accent/50 bg-surface p-0 text-ink shadow-neon backdrop:bg-black/70"
+    >
+      <div className="p-5 sm:p-7">
+        {/* Header */}
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <h3 id="cred-h" className="text-xl font-bold sm:text-2xl">
+              {c.title}
+            </h3>
+            <p className="mt-1 text-muted">{c.issuer}</p>
+          </div>
+
+          <button
+            onClick={onClose}
+            aria-label="Close credential details"
+            className="shrink-0 rounded-lg p-2 hover:bg-surface2"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Credential badges */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          <span className="chip">{c.type}</span>
+          <span className="chip">{c.category}</span>
+
+          {c.status === "draft" ? (
+            <span className="badge border-warn/50 text-warn">
+              Draft — details to confirm
+            </span>
+          ) : (
+            <span className="badge border-good/50 text-good">
+              Details confirmed
+            </span>
+          )}
+        </div>
+
+        {/* Metadata */}
+        <dl className="mt-5 grid gap-4 rounded-xl border border-line bg-bg/40 p-4 sm:grid-cols-2">
+          <div>
+            <dt className="text-sm text-muted">Issue date</dt>
+            <dd className="mt-1 font-medium">
+              {c.issueDate ?? "Not provided"}
+            </dd>
+          </div>
+
+          <div>
+            <dt className="text-sm text-muted">Skills</dt>
+            <dd className="mt-1 font-medium">
+              {c.skills.join(", ") || "Not specified"}
+            </dd>
+          </div>
         </dl>
-        {c.note && <p className="mt-3 text-sm text-muted">{c.note}</p>}
-        <div className="mt-4">{c.imageUrl ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={c.imageUrl} alt={`${c.title} credential`} className="max-h-60 rounded-lg border border-line" /> : <Placeholder label="credential image not supplied" className="h-24" />}</div>
-        <div className="mt-5 flex gap-3">
-          {c.verifyUrl ? <a href={c.verifyUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">Verify credential <ExternalLink className="h-4 w-4" aria-hidden /></a> : <span className="text-xs text-muted">No official verification link supplied yet.</span>}
-          <button className="btn-ghost" onClick={onClose}>Close</button>
+
+        {/* Description */}
+        {c.note && (
+          <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-muted">
+            {c.note}
+          </p>
+        )}
+
+        {/* Certificate preview */}
+        <div className="mt-5 overflow-hidden rounded-xl border border-line bg-bg/50 p-3 sm:p-4">
+          {c.imageUrl ? (
+            <a
+              href={c.imageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Open full-size certificate image"
+              className="block"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={c.imageUrl}
+                alt={`${c.title} certificate`}
+                className="mx-auto max-h-[55vh] w-auto max-w-full rounded-lg object-contain"
+              />
+              <p className="mt-3 text-center text-xs text-muted">
+                Click certificate to open full-size image
+              </p>
+            </a>
+          ) : c.pdfUrl ? (
+            <div className="py-8 text-center">
+              <FileText className="mx-auto h-12 w-12 text-accent" />
+              <p className="mt-3 font-medium">PDF certificate available</p>
+              <p className="mt-1 text-sm text-muted">
+                Open the original document to view your certificate.
+              </p>
+            </div>
+          ) : (
+            <div className="py-8 text-center text-sm text-muted">
+              Certificate preview not available yet.
+            </div>
+          )}
+        </div>
+
+        {/* Actions */}
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          {c.verifyUrl && (
+            <a
+              href={c.verifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              Verify credential
+              <ExternalLink className="h-4 w-4" aria-hidden />
+            </a>
+          )}
+
+          {c.pdfUrl && (
+            <a
+              href={c.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost"
+            >
+              <FileText className="h-4 w-4" aria-hidden />
+              View PDF
+              <ExternalLink className="h-4 w-4" aria-hidden />
+            </a>
+          )}
+
+          <button className="btn-ghost" onClick={onClose}>
+            Close
+          </button>
         </div>
       </div>
     </dialog>

@@ -53,8 +53,8 @@ export const RESUMES = [
   },
 ] as const;
 
-/** Portrait. Shown automatically when /public/images/portrait.jpg exists (your own photo). */
-export const PORTRAIT = { src: "/images/portrait.jpg", alt: "Portrait of Princess Joy Abigail Abique" };
+/** Portrait. Shown automatically when /public/images/portrait.png exists (your own photo). */
+export const PORTRAIT = { src: "/images/portrait.png", alt: "Portrait of Princess Joy Abigail Abique" };
 
 /** Calendly URLs are only accepted if they are https links on calendly.com. */
 export function validCalendlyUrl(u: string): boolean {
