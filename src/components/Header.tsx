@@ -21,11 +21,11 @@ export default function Header() {
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur">
+    <header className="site-header sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-xl">
       <div className="container-page flex h-16 items-center justify-between gap-3">
         <Link href="/" className="flex items-center gap-2 font-bold tracking-wide" aria-label="Abigail — home">
-          <Sparkles className="h-5 w-5 text-accent" aria-hidden />
-          ABIGAIL
+          <span className="brand-mark"><Sparkles className="h-4 w-4" aria-hidden /></span>
+          <span className="brand-word">ABIGAIL<span className="brand-dot">.</span></span>
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-5 xl:flex">

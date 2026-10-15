@@ -5,6 +5,14 @@ import { X } from "lucide-react";
 import { PROJECTS, type Project } from "@/data/projects";
 import { StatusBadge } from "./ui";
 
+function ProjectVisual({ area }: { area: Project["area"] }) {
+  if (area === "ai-automation") return <div className="project-preview preview-flow" aria-hidden><span className="preview-label">FLOW / LOCAL DEMO</span><div className="preview-nodes"><i>IN</i><b /><i>AI</i><b /><i>OUT</i></div><div className="preview-caption">parse <span>→</span> decide <span>→</span> route</div></div>;
+  if (area === "networking") return <div className="project-preview preview-network" aria-hidden><span className="preview-label">TOPOLOGY / LAB</span><svg viewBox="0 0 300 92"><path d="M150 19 79 68M150 19 221 68M79 68 32 82M79 68 112 82M221 68 188 82M221 68 268 82"/><circle cx="150" cy="19" r="10"/><rect x="65" y="57" width="28" height="20" rx="4"/><rect x="207" y="57" width="28" height="20" rx="4"/><circle cx="32" cy="82" r="5"/><circle cx="112" cy="82" r="5"/><circle cx="188" cy="82" r="5"/><circle cx="268" cy="82" r="5"/></svg></div>;
+  if (area === "cybersecurity") return <div className="project-preview preview-terminal" aria-hidden><span className="preview-label">SOC / SIMULATED</span><code><i>17:32:11</i> auth · MFA completed<br /><i>17:29:48</i> login · <b>review</b><br /><i>17:24:03</i> email · domain mismatch</code></div>;
+  if (area === "it-support") return <div className="project-preview preview-ticket" aria-hidden><span className="preview-label">SUPPORT / TICKET</span><div className="ticket-line"><b>INC-2048</b><span>In progress</span></div><div className="ticket-line"><span>Wi-Fi connectivity</span><i>Priority: medium</i></div><div className="ticket-progress"><i /></div></div>;
+  return <div className="project-preview preview-academic" aria-hidden><span className="preview-label">PROJECT / OVERVIEW</span><div className="preview-academic-title">{area === "academic" ? "DOCUMENTED PROJECT" : "TECHNICAL WORKSPACE"}</div><div className="preview-bars"><i /><i /><i /></div></div>;
+}
+
 function Dialog({ project, onClose }: { project: Project; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -50,6 +58,7 @@ export default function ProjectCards({ slugs, extra }: { slugs?: string[]; extra
       <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {list.map((p) => (
           <li key={p.slug} className="card card-hover flex flex-col p-5">
+            <ProjectVisual area={p.area} />
             <div className="flex items-start justify-between gap-3">
               <h3 className="font-semibold leading-snug">{p.title}</h3>
               <StatusBadge status={p.status} />

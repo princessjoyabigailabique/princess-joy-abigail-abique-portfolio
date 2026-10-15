@@ -105,9 +105,9 @@ export function PageHero({
   body: string;
   children?: React.ReactNode;
 }) {
+  const atmosphere = kicker.toLowerCase().includes("cyber") ? "cybersecurity" : kicker.toLowerCase().includes("automation") ? "automation" : kicker.toLowerCase().includes("network") ? "networking" : "support";
   return (
-    <section className="relative overflow-hidden border-b border-line">
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent2/20 via-transparent to-transparent" />
+    <section className={`page-atmosphere atmosphere-${atmosphere}`}>
       <div className="container-page relative py-14 sm:py-20">
         <div className="flex flex-wrap items-center gap-3">
           <p className="kicker">{kicker}</p>

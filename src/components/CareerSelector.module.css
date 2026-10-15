@@ -1,0 +1,38 @@
+.layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(18rem, .8fr); gap: 1.25rem; align-items: stretch; }
+.hub { min-height: 29rem; position: relative; isolation: isolate; overflow: hidden; border: 1px solid rgb(var(--line) / .75); border-radius: 1.5rem; background: radial-gradient(ellipse at 50% 50%, rgb(var(--accent) / .11), transparent 39%), linear-gradient(145deg, rgb(var(--surface) / .55), rgb(var(--surface-2) / .32)); }
+.hub::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .42; background-image: linear-gradient(rgb(var(--accent) / .07) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--accent) / .07) 1px, transparent 1px); background-size: 34px 34px; mask-image: radial-gradient(ellipse, black, transparent 85%); }
+.hub::after { content: ""; position: absolute; z-index: -1; inset: 12% 18%; border: 1px solid rgb(var(--accent) / .1); border-radius: 48%; transform: rotate(-20deg); }
+.wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; overflow: visible; }
+.wire { stroke: rgb(var(--accent) / .23); stroke-width: .28; stroke-dasharray: 1 1.2; transition: stroke .3s, stroke-width .3s, filter .3s; }
+.activeWire { stroke: rgb(var(--accent)); stroke-width: .65; stroke-dasharray: 1.3 .9; filter: drop-shadow(0 0 2px rgb(var(--accent) / .8)); animation: wire-flow 1.5s linear infinite; }
+.ring { fill: none; stroke: rgb(var(--accent) / .18); stroke-width: .25; stroke-dasharray: 1 1.5; }
+.core { position: absolute; left: 50%; top: 50%; width: 8.8rem; height: 8.8rem; display: flex; flex-direction: column; justify-content: center; align-items: center; transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid rgb(var(--accent) / .55); background: radial-gradient(circle at 35% 30%, rgb(156 108 223 / .28), rgb(21 15 37 / .94) 74%); box-shadow: 0 0 0 8px rgb(var(--accent) / .045), 0 0 42px rgb(var(--accent) / .19), inset 0 0 24px rgb(var(--accent) / .15); }
+.coreIcon { color: rgb(var(--accent)); filter: drop-shadow(0 0 9px rgb(var(--accent) / .8)); }
+.coreName { margin-top: .4rem; font-size: .8rem; font-weight: 800; letter-spacing: .2em; }
+.coreRole { margin-top: .2rem; color: rgb(var(--muted)); font: 500 .48rem var(--font-mono), monospace; letter-spacing: .1em; }
+.node { position: absolute; z-index: 2; display: flex; align-items: center; gap: .7rem; width: min(42%, 17rem); min-height: 4.8rem; padding: .8rem; text-align: left; border: 1px solid rgb(var(--line) / .8); border-radius: 1rem; color: rgb(var(--ink)); background: linear-gradient(140deg, rgb(var(--surface) / .9), rgb(var(--surface-2) / .76)); box-shadow: 0 12px 32px rgb(3 2 10 / .16); backdrop-filter: blur(14px); transition: .22s ease; }
+.node:hover, .selected { transform: translateY(-3px); border-color: rgb(var(--accent) / .8); box-shadow: 0 0 0 1px rgb(var(--accent) / .2), 0 0 28px rgb(var(--accent) / .2); }
+.node0 { left: 4%; top: 7%; } .node1 { right: 4%; top: 7%; } .node2 { left: 4%; bottom: 7%; } .node3 { right: 4%; bottom: 7%; }
+.nodeIcon { display: grid; place-items: center; flex: 0 0 2.5rem; height: 2.5rem; color: rgb(var(--accent)); border: 1px solid rgb(var(--accent) / .32); border-radius: .8rem; background: rgb(var(--accent) / .09); }
+.nodeText { min-width: 0; display: grid; gap: .1rem; }
+.nodeNum { color: rgb(var(--muted)); font: 500 .55rem var(--font-mono), monospace; letter-spacing: .11em; }
+.nodeText strong { font-size: .78rem; line-height: 1.2; }
+.nodeText small { overflow: hidden; color: rgb(var(--muted)); font-size: .62rem; text-overflow: ellipsis; white-space: nowrap; }
+.panel { padding: 1.4rem; border: 1px solid rgb(var(--line) / .75); border-radius: 1.5rem; background: linear-gradient(150deg, rgb(var(--surface) / .82), rgb(var(--surface-2) / .65)); box-shadow: inset 0 1px rgb(255 255 255 / .045), 0 20px 50px rgb(0 0 0 / .13); }
+.panelTop, .featureHeading { display: flex; justify-content: space-between; align-items: center; gap: .75rem; }
+.signal { display: flex; align-items: center; gap: .45rem; color: rgb(var(--good)); font: 600 .62rem var(--font-mono), monospace; letter-spacing: .12em; }
+.signal i { width: .42rem; height: .42rem; border-radius: 50%; background: rgb(var(--good)); box-shadow: 0 0 9px rgb(var(--good)); }
+.panelTitle { margin-top: .3rem; font-size: 1.25rem; font-weight: 750; line-height: 1.25; }
+.feature { margin-top: 1.2rem; padding: 1rem; border: 1px solid rgb(var(--accent) / .25); border-radius: 1rem; background: radial-gradient(ellipse at 90% 0%, rgb(var(--accent) / .1), transparent 60%), rgb(var(--bg) / .24); }
+.featureHeading span:first-child { color: rgb(var(--muted)); font: 600 .57rem var(--font-mono), monospace; letter-spacing: .1em; }
+.feature h4 { margin-top: .75rem; font-size: .92rem; font-weight: 700; }
+.feature p { margin-top: .35rem; color: rgb(var(--muted)); font-size: .73rem; line-height: 1.5; }
+.projectLink { display: inline-flex; align-items: center; gap: .2rem; margin-top: .75rem; color: rgb(var(--accent)); font-size: .75rem; font-weight: 700; }
+.spark { position: absolute; width: .22rem; height: .22rem; border-radius: 50%; background: rgb(var(--accent)); box-shadow: 0 0 10px 3px rgb(var(--accent) / .55); animation: sparkle 3.5s ease-in-out infinite; }
+.sparkA { left: 51%; top: 24%; } .sparkB { left: 49%; bottom: 23%; animation-delay: -1.7s; }
+.note { position: absolute; left: 46%; top: 32%; color: rgb(var(--accent)); font: italic .8rem cursive; opacity: .7; transform: rotate(-8deg); }
+@keyframes wire-flow { to { stroke-dashoffset: -4; } }
+@keyframes sparkle { 0%, 100% { opacity: .22; transform: scale(.7); } 50% { opacity: 1; transform: scale(1.25); } }
+@media (max-width: 800px) { .layout { grid-template-columns: 1fr; } .hub { min-height: 25rem; } }
+@media (max-width: 520px) { .hub { min-height: 31rem; } .node { width: 47%; min-height: 4.4rem; padding: .55rem; gap: .4rem; } .node0 { left: 2%; top: 4%; } .node1 { right: 2%; top: 4%; } .node2 { left: 2%; bottom: 4%; } .node3 { right: 2%; bottom: 4%; } .nodeIcon { flex-basis: 1.9rem; height: 1.9rem; } .nodeIcon :global(svg) { width: 17px; height: 17px; } .nodeText strong { font-size: .68rem; } .nodeText small { font-size: .54rem; } .core { width: 7rem; height: 7rem; } .note { top: 38%; font-size: .7rem; } }
+@media (prefers-reduced-motion: reduce) { .activeWire, .spark { animation: none; } }

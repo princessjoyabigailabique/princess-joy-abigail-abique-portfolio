@@ -1,7 +1,7 @@
 /**
  * Central site configuration.
- * Contact links come ONLY from environment variables — nothing is invented.
- * Empty value => the UI shows an honest "Not connected yet" state.
+ * Public profile links can be overridden with environment variables.
+ * Empty optional values (such as Viber) show an honest "Not connected yet" state.
  */
 export const SITE = {
   name: "Princess Joy Abigail Abique",
@@ -14,11 +14,11 @@ export const SITE = {
 };
 
 export const LINKS = {
-  linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
-  email: process.env.NEXT_PUBLIC_EMAIL_ADDRESS || "",
+  linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://www.linkedin.com/in/princessjoyabigailabique/",
+  email: process.env.NEXT_PUBLIC_EMAIL_ADDRESS || "abique.princessjoy@gmail.com",
   viber: process.env.NEXT_PUBLIC_VIBER_URL || "",
-  onlinejobs: process.env.NEXT_PUBLIC_ONLINEJOBS_URL || "",
-  tryhackme: process.env.NEXT_PUBLIC_TRYHACKME_URL || "",
+  onlinejobs: process.env.NEXT_PUBLIC_ONLINEJOBS_URL || "https://www.onlinejobs.ph/jobseekers/info/1271476",
+  tryhackme: process.env.NEXT_PUBLIC_TRYHACKME_URL || "https://tryhackme.com/p/Pr1Nc3ssJ0y",
   calendly: process.env.NEXT_PUBLIC_CALENDLY_URL || "",
 };
 

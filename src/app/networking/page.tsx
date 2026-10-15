@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { CtaBand, LinkButton, PageHero, Placeholder, SectionHeader, StatusBadge } from "@/components/ui";
 import Topology from "@/components/Topology";
+import TryHackMeRooms from "@/components/TryHackMeRooms";
 
 export const metadata: Metadata = { title: "Networking", description: "Networking fundamentals, a completed Cisco Packet Tracer device-setup activity, and an interactive simulated topology.", alternates: { canonical: "/networking" } };
 
@@ -39,6 +40,11 @@ export default function Networking() {
             <article key={n} className="card border-dashed p-5"><div className="flex items-start justify-between gap-3"><h3 className="font-semibold">{n}</h3><StatusBadge status="planned" /></div><p className="mt-2 text-sm text-muted">Learning goal. No evidence yet, so it isn’t listed as an accomplishment.</p></article>
           ))}
         </div>
+      </section>
+
+      <section className="container-page py-10" aria-labelledby="thm-network-h">
+        <SectionHeader kicker="TryHackMe · completed rooms" id="thm-network-h" title="Networking learning library" intro="Completed rooms focused on network fundamentals, protocols, web communication and infrastructure." />
+        <TryHackMeRooms perspective="Networking" />
       </section>
 
       <section className="container-page py-10" aria-labelledby="fund-h">

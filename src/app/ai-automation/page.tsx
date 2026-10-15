@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { CalendarCheck } from "lucide-react";
 import { CtaBand, LinkButton, PageHero, SectionHeader, StatusBadge } from "@/components/ui";
 import WorkflowExplorer from "@/components/WorkflowExplorer";
-import { EmailDemo, LeadDemo } from "@/components/AutomationDemos";
+import { LeadDemo } from "@/components/AutomationDemos";
+import EmailOperationsProject from "@/components/EmailOperationsProject";
 import { PROJECTS } from "@/data/projects";
+import TryHackMeRooms from "@/components/TryHackMeRooms";
 
 export const metadata: Metadata = { title: "AI & Automation", description: "n8n workflow projects: AI Email Operations Assistant, VA Lead Management System and the SecureDesk AI prototype, with interactive simulated demos.", alternates: { canonical: "/ai-automation" } };
 
@@ -31,7 +33,7 @@ export default function Automation() {
         <LinkButton href="#tools" variant="ghost">View my tools</LinkButton>
       </PageHero>
 
-      <section className="container-page space-y-6 py-10"><Intro slug="ai-email-operations-assistant" id="email-assistant" n="Featured project" /><EmailDemo /></section>
+      <EmailOperationsProject />
       <section className="container-page space-y-6 py-10"><Intro slug="va-lead-management-system" id="lead-management" n="Featured project" /><LeadDemo /></section>
       <section className="container-page space-y-6 py-10">
         <Intro slug="securedesk-ai" id="securedesk" n="Another project" />
@@ -41,6 +43,11 @@ export default function Automation() {
       <section className="container-page py-10" aria-labelledby="wf-h">
         <SectionHeader kicker="Workflow explorer" id="wf-h" title="Explore the workflow" intro="Select a step to see what it does, its inputs and outputs, its logic and how errors are handled." />
         <WorkflowExplorer />
+      </section>
+
+      <section className="container-page py-10" aria-labelledby="thm-ai-h">
+        <SectionHeader kicker="TryHackMe · completed rooms" id="thm-ai-h" title="AI & security automation learning" intro="Only completed rooms with a direct AI or security automation connection appear here. Security operations topics remain on the Cybersecurity page." />
+        <TryHackMeRooms perspective="AI & Automation" />
       </section>
 
       <section id="tools" className="container-page scroll-mt-24 py-10" aria-labelledby="tools-h">

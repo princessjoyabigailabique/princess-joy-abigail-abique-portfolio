@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ExternalLink, FileText, Mail, FlaskConical } from "lucide-react";
 import { CtaBand, LinkButton, PageHero, SectionHeader, StatusBadge } from "@/components/ui";
 import SocLab from "@/components/SocLab";
+import TryHackMeRooms from "@/components/TryHackMeRooms";
 import { LINKS } from "@/data/site";
 import type { Status } from "@/data/projects";
 
@@ -28,7 +29,7 @@ export default function Cyber() {
       </PageHero>
 
       <section className="container-page py-10" aria-labelledby="paths-h">
-        <SectionHeader kicker="TryHackMe learning journey" id="paths-h" title="My learning paths" intro="Progress is shown as status only. I haven’t listed percentages or individual rooms I can’t yet back with evidence." />
+        <SectionHeader kicker="TryHackMe learning journey" id="paths-h" title="My learning paths" intro="Path progress is shown separately from room completion. Completed rooms below are verified against my public profile." />
         <ul className="grid gap-4 md:grid-cols-3">
           {PATHS.map((p) => (
             <li key={p.title} className="card card-hover p-5">
@@ -39,8 +40,18 @@ export default function Cyber() {
         </ul>
       </section>
 
+      <section className="container-page py-10" aria-labelledby="rooms-h">
+        <SectionHeader kicker="TryHackMe · completed rooms" id="rooms-h" title="Security learning library" intro="Completed rooms from my public TryHackMe profile, grouped by the security topic they teach. Individual room completion is separate from learning path progress." />
+        <TryHackMeRooms perspective="Cybersecurity" />
+      </section>
+
+      <section className="container-page py-10" aria-labelledby="unclassified-h">
+        <SectionHeader kicker="TryHackMe · other completed rooms" id="unclassified-h" title="General learning & challenge rooms" intro="These completed rooms are general platform, research, programming, or event challenges rather than a clear fit for one of the four technical perspectives." />
+        <TryHackMeRooms perspective="Unclassified" />
+      </section>
+
       <section className="container-page py-10" aria-labelledby="labs-h">
-        <SectionHeader kicker="Evidence" id="labs-h" title="Lab & write-up library" intro="Verified TryHackMe rooms and technical write-ups will appear here." />
+        <SectionHeader kicker="Evidence" id="labs-h" title="Lab & write-up library" intro="Technical write-ups will be added when I can include the steps, evidence, findings and lessons from my own work." />
         <div className="card flex flex-col items-center gap-3 border-dashed p-10 text-center">
           <FlaskConical className="h-8 w-8 text-accent" aria-hidden />
           <p className="font-semibold">No verified write-ups published yet</p>
@@ -48,8 +59,7 @@ export default function Cyber() {
         </div>
       </section>
 
-      <section className="container-page py-10" aria-labelledby="lab-h">
-        <SectionHeader kicker="Interactive lab" id="lab-h" title="Security lab (simulated)" intro="Pick a fictional alert, inspect the sample logs, choose a triage decision, and see what evidence to check next." />
+      <section id="lab-h" className="container-page scroll-mt-24 py-10">
         <SocLab />
       </section>
 

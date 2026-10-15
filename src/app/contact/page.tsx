@@ -17,9 +17,9 @@ const CHANNELS = [
 export default function Contact() {
   return (
     <>
-      <section className="border-b border-line">
+      <section className="page-atmosphere">
         <div className="container-page py-14 sm:py-20">
-          <p className="kicker">Contact me</p>
+          <p className="kicker">Secure channel · contact</p>
           <h1 className="mt-2 max-w-3xl text-4xl font-extrabold leading-tight sm:text-5xl">Have a project, opportunity, or just want to <span className="grad-text">connect?</span></h1>
           <p className="mt-4 max-w-2xl text-muted sm:text-lg">I’m open to discussing new opportunities, collaborations, academic projects, or connecting with fellow tech enthusiasts.</p>
           <ul className="mt-5 flex flex-wrap gap-2"><li className="chip">Open for internships</li><li className="chip">Open for freelance / VA</li><li className="chip">Open for collaboration</li></ul>

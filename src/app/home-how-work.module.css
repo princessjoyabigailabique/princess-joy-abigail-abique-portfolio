@@ -1,0 +1,7 @@
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:2px 0;margin-top:.5rem;font-weight:600}
+.group{display:inline-flex;align-items:center;white-space:nowrap}
+.step{position:relative;border-radius:.35rem;padding:.08rem .2rem;color:rgb(var(--ink));animation:step-glow 7.5s ease-in-out infinite;animation-delay:calc(var(--step-order)*1.5s)}
+.arrow{display:inline-block;position:relative;padding:0 .15rem;color:rgb(var(--accent));opacity:.5;animation:arrow-travel 7.5s ease-in-out infinite;animation-delay:calc((var(--step-order) - 1)*1.5s + .65s)}
+@keyframes step-glow{0%,8%,100%{color:rgb(var(--ink));background:transparent;text-shadow:none;transform:translateY(0)}3%,7%{color:rgb(var(--accent));background:rgb(var(--accent)/.14);text-shadow:0 0 14px rgb(var(--accent)/.65);transform:translateY(-2px)}}
+@keyframes arrow-travel{0%,100%{opacity:.45;transform:translateX(-4px);text-shadow:none}4%,12%{opacity:1;transform:translateX(3px);text-shadow:0 0 12px rgb(var(--accent)/.8)}18%{opacity:.5;transform:translateX(3px);text-shadow:none}}
+@media(prefers-reduced-motion:reduce){.step,.arrow{animation:none}.step:first-child{color:rgb(var(--accent));text-shadow:0 0 12px rgb(var(--accent)/.55)}}

@@ -1,102 +1,89 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BookOpen, Code2, Search, TrendingUp, GraduationCap, MapPin, User, Briefcase, ArrowRight, FileText, Mail } from "lucide-react";
+import { ArrowRight, FileText, Mail, Network, Sparkles } from "lucide-react";
 import Portrait from "@/components/Portrait";
 import PersonalSection from "@/components/Collapsible";
+import EducationTimeline from "@/components/EducationTimeline";
 import AreaIcon from "@/components/AreaIcon";
 import { SectionHeader } from "@/components/ui";
-import ProjectCards from "@/components/ProjectCards";
 import { AREAS } from "@/data/projects";
+import { LINKS } from "@/data/site";
 
-export const metadata: Metadata = { title: "About", description: "About Princess Joy Abigail Abique — a fourth-year BSIT student who learns by building and troubleshooting.", alternates: { canonical: "/about" } };
+export const metadata: Metadata = { title: "About", description: "Meet Princess Joy Abigail Abique, a fourth-year BSIT student exploring cybersecurity, AI automation, networking and IT systems.", alternates: { canonical: "/about" } };
 
-const FACTS = [
-  { I: User, k: "Full name", v: "Princess Joy Abigail Abique" },
-  { I: MapPin, k: "Location", v: "Philippines" },
-  { I: GraduationCap, k: "Education", v: "BSIT — 4th year" },
-  { I: Briefcase, k: "Availability", v: "Open for internship opportunities" },
-];
-const STEPS = [
-  { I: BookOpen, t: "Learn", d: "Understand the concepts and see the bigger picture." },
-  { I: Code2, t: "Build", d: "Turn what I learn into practical projects or labs." },
-  { I: Search, t: "Test", d: "Check if it works, troubleshoot errors, and learn from mistakes." },
-  { I: TrendingUp, t: "Improve", d: "Document what I learned and find ways to do it better." },
+const INTERESTS = [
+  { id: "cybersecurity", description: "I’m interested in security monitoring, threat analysis, SIEM concepts, and learning through hands-on practice." },
+  { id: "ai-automation", description: "I enjoy building workflows that simplify repetitive tasks with tools such as n8n, while exploring useful AI-powered solutions." },
+  { id: "networking", description: "I’m learning how network infrastructure, connectivity, and device configuration fit together through practical exercises." },
+  { id: "it-support", description: "I like troubleshooting and exploring system administration, identity and access management, and tools such as Microsoft Entra ID and Intune." },
+] as const;
+
+const APPROACH = [
+  { title: "Understand", text: "Break down the problem and identify what needs to happen." },
+  { title: "Build", text: "Apply what I know and research what I don't." },
+  { title: "Test", text: "Check the result, identify errors, and troubleshoot." },
+  { title: "Improve", text: "Document what I learned and refine the solution." },
 ];
 
 export default function About() {
   return (
     <>
-      <section className="container-page py-10 sm:py-14">
-        <div className="grid gap-8 lg:grid-cols-[auto_1fr_auto]">
-          <Portrait className="h-72 w-56" />
-          <div>
-            <p className="kicker">About me</p>
-            <h1 className="mt-2 text-4xl font-extrabold leading-tight sm:text-5xl">I learn by building, and grow by <span className="grad-text">troubleshooting.</span></h1>
-            <p className="mt-5 max-w-2xl text-muted sm:text-lg">
-              I’m Princess Joy Abigail Abique, a fourth-year BSIT student from the Philippines. I enjoy exploring cybersecurity, AI and automation, networking, and IT support/system administration. I like turning what I learn into practical projects, documenting the process, and improving through hands-on practice. I’m always happy to learn from experienced IT professionals.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/resume" className="btn-primary"><FileText className="h-4 w-4" aria-hidden /> View Resume</Link>
-              <Link href="/contact" className="btn-ghost"><Mail className="h-4 w-4" aria-hidden /> Contact Me</Link>
+      <section className="page-atmosphere atmosphere-cybersecurity">
+        <div className="container-page relative py-10 sm:py-16">
+          <div className="about-intro">
+            <Portrait className="about-portrait" />
+            <div className="about-intro-copy">
+              <p className="kicker">Meet Abigail <span className="eyebrow-note ml-2 normal-case tracking-normal">currently learning, always curious ✦</span></p>
+              <h1 className="mt-3 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">The person behind the <span className="grad-text">systems.</span></h1>
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">I'm Princess Joy Abigail Abique, a fourth-year BSIT student exploring the intersection of cybersecurity, AI automation, and practical IT solutions. I like understanding how things work, finding ways to make processes better, and turning what I learn into something I can actually use. I'm still growing, experimenting, and figuring out where my interests can take me—and that's part of the journey.</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/resume" className="btn-primary"><FileText className="h-4 w-4" aria-hidden /> View Resume</Link>
+                <Link href="/contact#inquiry" className="btn-ghost"><Mail className="h-4 w-4" aria-hidden /> Get in touch</Link>
+              </div>
+              <p className="mt-4 flex items-center gap-2 text-xs text-muted"><Sparkles size={14} className="text-accent" aria-hidden /> Fourth-year BSIT student <span aria-hidden>·</span> Philippines</p>
             </div>
           </div>
-          <ul aria-label="Quick facts" className="card grid content-start gap-4 p-5 lg:w-72">
-            {FACTS.map(({ I, k, v }) => (
-              <li key={k} className="flex gap-3">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent"><I className="h-5 w-5" aria-hidden /></span>
-                <div><p className="text-xs text-accent">{k}</p><p className="text-sm">{v}</p></div>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
-      <section className="container-page py-8" aria-labelledby="how-h">
-        <SectionHeader kicker="My approach" id="how-h" title="How I work" intro="I like understanding the “how” and “why” behind things. I learn by doing, ask questions, and improve through practice and troubleshooting." />
-        <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map(({ I, t, d }, i) => (
-            <li key={t} className="card card-hover p-5">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/15 text-accent"><I className="h-5 w-5" aria-hidden /></span>
-              <p className="mt-3 flex items-baseline gap-2"><span className="font-mono text-sm text-accent">0{i + 1}</span><span className="text-lg font-semibold">{t}</span></p>
-              <p className="mt-1 text-sm text-muted">{d}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="container-page py-8" aria-labelledby="explore-h">
-        <SectionHeader kicker="Technical interests" id="explore-h" title="What I’m exploring" intro="A quick overview of what I’m currently learning and building." />
+      <section className="container-page py-10 sm:py-14" aria-labelledby="interests-h">
+        <SectionHeader kicker="What catches my curiosity" id="interests-h" title="How I Fit into Tech" intro="These are the areas I’m exploring and what draws me to them. Choose a path to see the related work elsewhere in my portfolio." />
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {AREAS.map((a) => (
-            <li key={a.id} className="card card-hover flex flex-col p-5">
-              <span className="flex items-center gap-3 font-semibold"><span className="text-accent"><AreaIcon area={a.id} /></span>{a.label}</span>
-              <p className="mt-2 flex-1 text-sm text-muted">{a.blurb}</p>
-              <ul className="mt-3 flex flex-wrap gap-1.5">{a.topics.slice(0, 3).map((t) => <li key={t} className="chip">{t}</li>)}</ul>
-              <Link href={a.href} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent">Explore <ArrowRight className="h-4 w-4" aria-hidden /></Link>
-            </li>
-          ))}
+          {INTERESTS.map((interest, index) => {
+            const area = AREAS.find((item) => item.id === interest.id)!;
+            return <li key={area.id}><Link href={area.href} className="about-interest card card-hover flex h-full flex-col p-5">
+              <span className="flex items-center justify-between"><span className="flex h-11 w-11 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent"><AreaIcon area={area.id} /></span><span className="font-mono text-xs text-accent/75">0{index + 1}</span></span>
+              <h3 className="mt-4 font-semibold">{area.label}</h3><p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{interest.description}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent">Explore this area <ArrowRight className="h-4 w-4" aria-hidden /></span>
+            </Link></li>;
+          })}
         </ul>
       </section>
 
-      <section className="container-page py-8" aria-labelledby="journey-h">
-        <SectionHeader kicker="Education & learning journey" id="journey-h" title="My journey so far" intro="A combination of formal education, hands-on practice, online courses and personal projects." />
-        <ol className="grid gap-4 md:grid-cols-3">
-          {[
-            ["BS Information Technology (BSIT)", "Philippines — currently in 4th year."],
-            ["Certifications & online learning", "Courses from providers such as LinkedIn Learning, Cisco Networking Academy, IBM and TryHackMe. See the Certifications page for verification status."],
-            ["Academic & personal projects", "School projects, automation workflows and hands-on labs."],
-          ].map(([t, d]) => (
-            <li key={t} className="card border-l-2 border-l-accent p-5"><p className="font-semibold">{t}</p><p className="mt-1 text-sm text-muted">{d}</p></li>
-          ))}
+      <section className="container-page py-8 sm:py-12" aria-labelledby="journey-h">
+        <SectionHeader kicker="Learning as I go" id="journey-h" title="My Learning Journey" intro="The schools and milestones that shaped my path so far. Select a card to open its photo gallery." />
+        <EducationTimeline />
+      </section>
+
+      <section className="container-page py-8 sm:py-12" aria-labelledby="approach-h">
+        <SectionHeader kicker="A practical loop" id="approach-h" title="How I Approach a Problem" intro="A simple process I try to follow when I’m learning or building something." />
+        <ol className="about-approach grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {APPROACH.map(({ title, text }, i) => <li key={title} className="about-approach-step card p-5"><span className="font-mono text-xs text-accent">0{i + 1} / 04</span><h3 className="mt-3 text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted">{text}</p></li>)}
         </ol>
       </section>
 
-      <section id="academic" className="container-page scroll-mt-24 py-8" aria-labelledby="acad-h">
-        <SectionHeader kicker="School work" id="acad-h" title="Academic projects" intro="Projects from my BSIT program. I only list details I can confirm." />
-        <ProjectCards slugs={["itrackit", "dough-delight-pos", "examease"]} />
-      </section>
-
       <PersonalSection />
+
+      <section className="container-page py-10 sm:py-14" aria-labelledby="headed-h">
+        <div className="about-future card p-6 sm:p-9">
+          <div className="max-w-2xl"><p className="kicker">Where I'm headed</p><h2 id="headed-h" className="section-title mt-2">Still learning. Ready to contribute.</h2><p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">I'm looking for opportunities to put my knowledge into practice, learn from real-world challenges, and grow alongside people who care about building useful technology.</p></div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/resume" className="btn-primary"><FileText className="h-4 w-4" aria-hidden /> Resume</Link>
+            {LINKS.linkedin ? <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="btn-ghost"><Network className="h-4 w-4" aria-hidden /> LinkedIn</a> : <span className="btn-ghost cursor-not-allowed opacity-65" aria-label="LinkedIn profile link is not connected yet"><Network className="h-4 w-4" aria-hidden /> LinkedIn · not connected</span>}
+            <Link href="/contact#inquiry" className="btn-ghost"><Mail className="h-4 w-4" aria-hidden /> Contact</Link>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

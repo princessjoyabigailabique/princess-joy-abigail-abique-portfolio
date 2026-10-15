@@ -36,6 +36,28 @@ export interface Project {
 /** Single source of truth for project statuses. Update here and every page updates. */
 export const PROJECTS: Project[] = [
   {
+    slug: "security-lab-simulated",
+    title: "Security Lab (Simulated)",
+    area: "cybersecurity",
+    status: "simulated",
+    summary: "An interactive browser-only alert triage workspace for filtering fictional security events and inspecting sample evidence.",
+    tools: ["SIEM concepts", "Log analysis", "MITRE ATT&CK", "KQL"],
+    confirmed: ["Built as an interactive portfolio learning simulation.", "Includes sample event filters, evidence context and example queries."],
+    limitations: ["Uses fictional events and does not connect to a SIEM or represent real security activity."],
+    href: "/cybersecurity#lab-h",
+  },
+  {
+    slug: "support-ticket-simulation",
+    title: "IT Support Ticket Simulation",
+    area: "it-support",
+    status: "simulated",
+    summary: "A fictional helpdesk ticket that visitors can troubleshoot step by step and resolve with a documented outcome.",
+    tools: ["Troubleshooting", "Service desk", "Documentation"],
+    confirmed: ["Built as an interactive portfolio learning simulation with sample tickets."],
+    limitations: ["The tickets and troubleshooting environment are fictional; no support system is connected."],
+    href: "/it-support#ticket",
+  },
+  {
     slug: "ai-email-operations-assistant",
     title: "AI Email Operations Assistant",
     area: "ai-automation",
