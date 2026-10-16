@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --bg: 247 244 255;
-  --surface: 255 255 255;
-  --surface-2: 241 236 252;
-  --line: 218 207 239;
-  --ink: 29 22 46;
-  --muted: 91 82 112;
-  --accent: 114 63 190;
-  --accent-2: 136 73 224;
+  --bg: 233 229 239;
+  --surface: 243 240 247;
+  --surface-2: 225 220 234;
+  --line: 197 188 211;
+  --ink: 30 24 43;
+  --muted: 76 68 91;
+  --accent: 105 55 166;
+  --accent-2: 122 61 181;
   --good: 4 120 87;
   --warn: 133 77 14;
   --bad: 185 28 28;
@@ -59,9 +59,11 @@ body::after {
   background-attachment: fixed;
 }
 :root[data-theme="light"] body {
-  background-image: radial-gradient(ellipse at 78% -8%, rgb(171 130 225 / .18), transparent 44%), radial-gradient(ellipse at 0% 35%, rgb(198 174 235 / .16), transparent 40%);
+  background-image: radial-gradient(ellipse at 78% -8%, rgb(145 111 181 / .10), transparent 44%), radial-gradient(ellipse at 0% 35%, rgb(171 151 194 / .09), transparent 40%);
   background-attachment: fixed;
 }
+:root[data-theme="light"] body::before { opacity: .22; }
+:root[data-theme="light"] body::after { opacity: .09; }
 :focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 3px; border-radius: 6px; }
 ::selection { color: white; background: rgb(var(--accent-2)); }
 
