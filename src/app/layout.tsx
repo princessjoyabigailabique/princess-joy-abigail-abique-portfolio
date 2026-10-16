@@ -6,6 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ThemeScript from "@/components/ThemeScript";
 import MagicCursor from "@/components/MagicCursor";
+import AmbientGarden from "@/components/AmbientGarden";
+import LoadingIntro from "@/components/LoadingIntro";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -31,8 +33,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeScript />
       </head>
       <body>
+        <AmbientGarden />
+        <LoadingIntro />
         <MagicCursor />
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent2 focus:px-4 focus:py-2 focus:text-white">
+        <a href="#main" className="intro-skip-link sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent2 focus:px-4 focus:py-2 focus:text-white">
           Skip to content
         </a>
         <Header />

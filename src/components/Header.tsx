@@ -24,7 +24,7 @@ export default function Header() {
   return (
     <header className="site-header sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-xl">
       <div className="container-page flex h-16 items-center justify-between gap-3">
-        <Link href="/" className="flex items-center gap-2 font-bold tracking-wide" aria-label="Abique — home">
+        <Link href="/" className="brand-signature flex items-center gap-2 font-bold tracking-wide" aria-label="Abique — home">
           <Image src="/images/abique-emblem.png" alt="" width={36} height={36} priority className="h-9 w-9 rounded-full object-cover" />
           <span className="brand-word">ABIQUE<span className="brand-dot">.</span></span>
         </Link>
@@ -48,7 +48,7 @@ export default function Header() {
           <ThemeToggle />
           <Link
             href="/resume"
-            className="inline-flex h-10 items-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-purple-500 px-4 text-sm font-semibold text-white transition hover:shadow-neon"
+            className="header-resume inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-semibold text-white transition"
           >
             <FileText className="h-4 w-4" aria-hidden />
             Resume
