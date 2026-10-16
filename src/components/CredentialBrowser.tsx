@@ -174,6 +174,7 @@ export default function CredentialBrowser() {
               <CertificatePreview credential={c} size="card" />
               <div className="mt-3 flex items-start justify-between gap-2"><h3 className="line-clamp-2 min-h-[2.75rem] font-semibold leading-snug">{c.title}</h3>{c.status === "draft" && <span className="badge shrink-0 border-warn/50 text-warn">Draft</span>}</div>
               <p className="mt-1 min-h-5 text-sm text-muted">{c.issuer}</p>
+              <div className="mt-2 flex min-h-7 flex-wrap gap-1.5"><span className="chip px-2 py-1 text-[11px]">{c.category}</span><span className="chip px-2 py-1 text-[11px]">{c.type}</span></div>
               <button onClick={() => setOpen(c)} className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-accent/25 bg-accent/10 px-3 text-sm font-semibold text-accent transition hover:border-accent/50 hover:bg-accent/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">View Details <ArrowUpRight className="h-4 w-4" aria-hidden /></button>
             </li>
           ))}

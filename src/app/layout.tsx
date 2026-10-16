@@ -5,12 +5,14 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ThemeScript from "@/components/ThemeScript";
+import MagicCursor from "@/components/MagicCursor";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: { default: SITE.title, template: `%s | ${SITE.shortName}` },
   description: SITE.description,
+  icons: { icon: "/images/abique-emblem.png", apple: "/images/abique-emblem.png" },
   openGraph: {
     title: SITE.title,
     description: SITE.description,
@@ -29,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeScript />
       </head>
       <body>
+        <MagicCursor />
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent2 focus:px-4 focus:py-2 focus:text-white">
           Skip to content
         </a>

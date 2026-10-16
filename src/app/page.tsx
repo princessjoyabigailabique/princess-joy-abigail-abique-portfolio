@@ -71,7 +71,7 @@ export default function Home() {
 
       <section className="container-page py-10" aria-labelledby="featured-h">
         <SectionHeader kicker="Featured work" id="featured-h" title="Selected projects and activities" intro="Statuses are shown exactly as they are — nothing here is presented as production work." />
-        <ProjectCards slugs={["ai-email-operations-assistant", "security-lab-simulated", "packet-tracer-device-setup", "support-ticket-simulation", "va-lead-management-system", "securedesk-ai"]} extra={<li><Link href="/about#academic" className="card card-hover flex h-full min-h-[10rem] flex-col items-start justify-center gap-2 border-dashed p-5"><span className="font-semibold">More academic projects</span><span className="text-sm text-muted">DOUGH DELIGHT CAFE POS, ExamEase and ITRACKIT.</span><span className="inline-flex items-center gap-1 text-sm font-semibold text-accent">See them <ArrowRight className="h-4 w-4" aria-hidden /></span></Link></li>} />
+        <ProjectCards slugs={["ai-email-operations-assistant", "security-lab-simulated", "packet-tracer-device-setup", "support-ticket-simulation", "securedesk-ai"]} extra={<li><Link href="/about#academic" className="card card-hover flex h-full min-h-[10rem] flex-col items-start justify-center gap-2 border-dashed p-5"><span className="font-semibold">More academic projects</span><span className="text-sm text-muted">DOUGH DELIGHT CAFE POS, ExamEase and ITRACKIT.</span><span className="inline-flex items-center gap-1 text-sm font-semibold text-accent">See them <ArrowRight className="h-4 w-4" aria-hidden /></span></Link></li>} />
       </section>
 
       <section className="container-page py-10" aria-labelledby="progress-h">

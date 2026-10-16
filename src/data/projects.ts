@@ -76,22 +76,6 @@ export const PROJECTS: Project[] = [
     href: "/ai-automation#email-assistant",
   },
   {
-    slug: "va-lead-management-system",
-    title: "VA Lead Management System",
-    area: "ai-automation",
-    status: "in-progress",
-    summary:
-      "An n8n + Google Sheets workflow for lead intake, data preparation, priority routing (Low, Medium, High, Urgent) and notifications.",
-    tools: ["n8n", "Google Sheets"],
-    confirmed: ["Uses n8n and Google Sheets for intake, prioritisation and routing logic."],
-    limitations: [
-      "Under active development; details may change.",
-      "No conversion, revenue or client results are claimed.",
-      "The website demo is a local simulation using fictional sample data.",
-    ],
-    href: "/ai-automation#lead-management",
-  },
-  {
     slug: "securedesk-ai",
     title: "SecureDesk AI",
     area: "ai-automation",

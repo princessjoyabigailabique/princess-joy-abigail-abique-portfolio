@@ -30,7 +30,7 @@ Resume PDFs and the portrait are **detected automatically** from the file system
 4. **Calendly** (below) → `NEXT_PUBLIC_CALENDLY_URL` (must be an `https://calendly.com/...` link or it is refused).
 5. **Contact form** (Resend, below).
 6. **Credentials:** for each real one confirm exact title, issuer, type and date; add `issueDate`, `verifyUrl`, `imageUrl` (`public/images/certs/`) if you have them; set `status: "verified"`; delete any you cannot support.
-7. **Facts to confirm:** VA Lead Management System current status (set to "in progress"); tech stack and your contribution for ITRACKIT, DOUGH DELIGHT CAFE POS and ExamEase; "Philippines" location and "open to internship opportunities" wording; the personal "A little more about me" content (section is hidden in production until you write it — edit `src/components/Collapsible.tsx`).
+7. **Facts to confirm:** tech stack and your contribution for ITRACKIT, DOUGH DELIGHT CAFE POS and ExamEase; "Philippines" location and "open to internship opportunities" wording; the personal "A little more about me" content (section is hidden in production until you write it — edit `src/components/Collapsible.tsx`).
 
 ## Contact form (Resend)
 1. Create a Resend account, verify a sending domain, create an API key.

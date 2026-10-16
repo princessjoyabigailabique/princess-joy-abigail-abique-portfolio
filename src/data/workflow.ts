@@ -15,8 +15,3 @@ export const EMAIL_SAMPLES = [
   { id: "newsletter", from: "news@example.net", subject: "This week’s product newsletter", body: "Top stories and tips from our team this week.", category: "Newsletter", priority: "Low", route: "Archive", reply: "No reply needed." },
 ];
 
-export const LEAD_SAMPLES = [
-  { id: "va", name: "Maria Santos", email: "maria@example.com", service: "Virtual Assistant Services", summary: "Looking for a virtual assistant to help with email management and calendar entry.", priority: "Medium", next: "Send introduction and availability" },
-  { id: "urgent", name: "Alex Reyes", email: "alex@example.com", service: "Workflow Automation", summary: "Needs lead follow-up automated before a product launch next week.", priority: "Urgent", next: "Contact within one business day" },
-  { id: "low", name: "Sam Cruz", email: "sam@example.com", service: "General question", summary: "Asking general questions about services; no timeline.", priority: "Low", next: "Add to monthly follow-up list" },
-];

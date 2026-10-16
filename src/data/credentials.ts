@@ -79,6 +79,7 @@ export const CREDENTIALS: Credential[] = [
     issueDate: "2026-07",
     verifyUrl:
       "https://www.credly.com/badges/9fac22d3-156a-4d8e-af2b-9b7f552f97f5/public_url",
+    imageUrl: "/images/certs/ibm-artificial-intelligence-fundamentals-1.png",
     pdfUrl: "/images/certs/ibm-artificial-intelligence-fundamentals.pdf",
   },
   {
@@ -119,6 +120,7 @@ export const CREDENTIALS: Credential[] = [
     issueDate: "2026-04",
     verifyUrl:
       "https://credsverse.com/credentials/f25ccfeb-40fd-4e23-b14f-a48a6dc2b7ed?preview=1",
+    imageUrl: "/images/certs/cyber-recon-enumeration-1.png",
     pdfUrl: "/images/certs/cyber-recon-enumeration.pdf",
   },
   {
@@ -132,6 +134,7 @@ export const CREDENTIALS: Credential[] = [
     issueDate: "2026-06-18",
     verifyUrl:
       "https://www.linkedin.com/learning/certificates/8cc342b474dd48e94c772e842ea272dcb8caef944a23a587d30fa4c623803e35?trk=share_certificate&contentTrackingId=kO37wO31TJKNE5iO6qB0pA%3D%3D&viewName=premium-nav-upsell-text&upsellOrderOrigin=Tracking%3Av1%3Apremium_nav_upsell_text_winback%3ANav%3AIn-Product",
+    imageUrl: "/images/certs/cybersecurity-threat-landscape-1.png",
     pdfUrl: "/images/certs/cybersecurity-threat-landscape.pdf",
   },
   {
@@ -144,6 +147,7 @@ export const CREDENTIALS: Credential[] = [
     status: "verified",
     issueDate: "2026-08-17",
     verifyUrl: "https://cert.efset.org/en/NJVW1i",
+    imageUrl: "/images/certs/ef-set-english-c2-proficient-1.png",
     pdfUrl: "/images/certs/ef-set-english-c2-proficient.pdf",
     note: "Score: 81/100, C2 Proficient.",
   },
@@ -168,6 +172,7 @@ export const CREDENTIALS: Credential[] = [
     skills: ["Governance", "Risk Management", "Compliance"],
     status: "verified",
     issueDate: "2026-06-17",
+    imageUrl: "/images/certs/grc-essentials-pearson-1.png",
     pdfUrl: "/images/certs/grc-essentials-pearson.pdf",
     note: "Course duration: 1 hour 25 minutes.",
   },
@@ -194,6 +199,7 @@ export const CREDENTIALS: Credential[] = [
     issueDate: "2026-07",
     verifyUrl:
       "https://skills.yourlearning.ibm.com/certificate/share/12fa1d6d0eewogICJvYmplY3RUeXBlIiA6ICJBQ1RJVklUWSIsCiAgImxlYXJuZXJDTlVNIiA6ICI4MDQ3OTkyUkVHIiwKICAib2JqZWN0SWQiIDogIkFMTS1DT1VSU0VfNDA1ODkxOCIKfQ568dfb1baf-10",
+    imageUrl: "/images/certs/ibm-intro-ai.png",
   },
   {
     id: "intro-cloud-security",
@@ -230,6 +236,7 @@ export const CREDENTIALS: Credential[] = [
     issueDate: "2026-07",
     verifyUrl:
       "https://credsverse.com/credentials/933eacb9-be7b-489b-9300-2659e394f7f5?preview=1",
+    imageUrl: "/images/certs/introduction-to-microsoft-entra-1.png",
     pdfUrl: "/images/certs/introduction-to-microsoft-entra.pdf",
   },
   {
@@ -241,7 +248,7 @@ export const CREDENTIALS: Credential[] = [
     skills: ["Project Coordination", "Teamwork", "System Development"],
     status: "draft",
     issueDate: "2025-03-14",
-    pdfUrl: "/images/certs/itrackit-best-group-award.pdf",
+    imageUrl: "/images/certs/itrackit-best-group-award.png",
   },
   {
     id: "machine-learning-deep-learning",
@@ -268,6 +275,7 @@ export const CREDENTIALS: Credential[] = [
     issueDate: "2026-06-22",
     verifyUrl:
       "https://www.linkedin.com/learning/certificates/6865471d2a0920c4939229a466ae0a4fb3380d29f6a94acbbc358aef942590eb",
+    imageUrl: "/images/certs/microsoft-azure-essentials.png",
     pdfUrl: "/images/certs/microsoft-azure-essentials.pdf",
   },
   {
@@ -281,6 +289,7 @@ export const CREDENTIALS: Credential[] = [
     issueDate: "2026-06-22",
     verifyUrl:
       "https://www.linkedin.com/learning/certificates/2c61c607d717dadd769e25a1a4eed988684f55ec8e5a092e5ca8f6599c19dc05?trk=share_certificate&contentTrackingId=rGiuNJq%2FTbOlg%2BknbKJ0ZA%3D%3D&viewName=premium-nav-upsell-text&upsellOrderOrigin=Tracking%3Av1%3Apremium_nav_upsell_text_winback%3ANav%3AIn-Product",
+    imageUrl: "/images/certs/microsoft-azure-essentials-professional.png",
     pdfUrl: "/images/certs/microsoft-azure-essentials-professional.pdf",
   },
   {
@@ -320,6 +329,7 @@ export const CREDENTIALS: Credential[] = [
     skills: ["Networking", "Switches", "Routers", "Firewalls", "Wi-Fi"],
     status: "draft",
     issueDate: "2025-09",
+    imageUrl: "/images/certs/network-devices-wifi-configuration-1.png",
     pdfUrl: "/images/certs/network-devices-wifi-configuration.pdf",
   },
   {
@@ -346,6 +356,7 @@ export const CREDENTIALS: Credential[] = [
     status: "verified",
     issueDate: "2026-07-23",
     verifyUrl: "https://tryhackme.com/certificate/THM-7C1EKTSXXZ",
+    imageUrl: "/images/certs/tryhackme-pre-security-1.png",
     pdfUrl: "/images/certs/tryhackme-pre-security.pdf",
     note: "Certificate ID: THM-7C1EKTSXXZ. Expires July 2029.",
   },
@@ -385,6 +396,7 @@ export const CREDENTIALS: Credential[] = [
     skills: ["AI Security", "Cybersecurity", "Security Awareness"],
     status: "draft",
     issueDate: "2026-09-11",
+    imageUrl: "/images/certs/securing-ai-101-1.png",
     pdfUrl: "/images/certs/securing-ai-101.pdf",
     note: "Certificate ID: f3c07b91-4af9-410b-b308-2727ff71b657.",
   },
@@ -399,6 +411,7 @@ export const CREDENTIALS: Credential[] = [
     issueDate: "2026-06-17",
     verifyUrl:
       "https://www.linkedin.com/learning/certificates/4d760bdbb2f3472bdcd365114f042e4c897d4c2e7dc1841658de6dad9c991398?trk=share_certificate&contentTrackingId=av0%2BV6rWSziDeVVs8%2F0j3g%3D%3D&viewName=premium-nav-upsell-text&upsellOrderOrigin=Tracking%3Av1%3Apremium_nav_upsell_text_winback%3ANav%3AIn-Product",
+    imageUrl: "/images/certs/security-monitoring-siem-fundamentals-1.png",
     pdfUrl: "/images/certs/security-monitoring-siem-fundamentals.pdf",
   },
   {
@@ -448,6 +461,7 @@ export const CREDENTIALS: Credential[] = [
     skills: ["Software Documentation", "Data Entry", "Presentation"],
     status: "draft",
     issueDate: "2024-04",
+    imageUrl: "/images/certs/company-proposal-system-showcase-1.png",
   },
   {
     id: "exemplary-ui-design",

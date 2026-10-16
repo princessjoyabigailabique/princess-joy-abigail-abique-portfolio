@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
-import { ArrowUpRight, Fingerprint } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { AREAS, PROJECTS } from "@/data/projects";
 import AreaIcon from "./AreaIcon";
 import { StatusBadge } from "./ui";
@@ -27,8 +28,8 @@ export default function CareerSelector() {
           <circle cx="50" cy="50" r="15" className={styles.ring} />
         </svg>
         <div className={styles.core}>
-          <span className={styles.coreIcon}><Fingerprint size={23} aria-hidden /></span>
-          <span className={styles.coreName}>ABIGAIL</span>
+          <span className={styles.coreIcon}><Image src="/images/abique-emblem.png" alt="" width={64} height={64} className="h-14 w-14 rounded-full object-cover" /></span>
+          <span className={styles.coreName}>ABIQUE</span>
           <span className={styles.coreRole}>DIGITAL WORKSPACE</span>
         </div>
         {AREAS.map((area, index) => {

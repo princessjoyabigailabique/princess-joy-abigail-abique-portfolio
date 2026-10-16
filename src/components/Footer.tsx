@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import Image from "next/image";
 import { NAV, SITE } from "@/data/site";
 
 export default function Footer() {
@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="container-page grid gap-8 py-10 md:grid-cols-3">
         <div>
           <p className="flex items-center gap-2 font-bold">
-            <Sparkles className="h-5 w-5 text-accent" aria-hidden /> ABIGAIL
+            <Image src="/images/abique-emblem.png" alt="" width={28} height={28} className="h-7 w-7 rounded-full object-cover" /> ABIQUE
           </p>
           <p className="mt-2 text-sm text-muted">{SITE.name} — fourth-year BSIT student.</p>
           <p className="mt-1 text-sm text-muted">Building skills. Creating solutions. Growing every day.</p>

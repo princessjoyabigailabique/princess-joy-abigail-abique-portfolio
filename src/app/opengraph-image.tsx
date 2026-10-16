@@ -6,7 +6,7 @@ export default function Image() {
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: 80, background: "linear-gradient(135deg,#0a0714,#2a1560)", color: "#f4f1ff" }}>
-        <div style={{ fontSize: 30, color: "#a855f7" }}>ABIGAIL</div>
+        <div style={{ fontSize: 30, color: "#a855f7" }}>ABIQUE</div>
         <div style={{ fontSize: 76, fontWeight: 800, marginTop: 16 }}>Princess Joy Abigail Abique</div>
         <div style={{ fontSize: 34, marginTop: 20, color: "#c9bfe8" }}>4th-year BSIT student · Cybersecurity · AI &amp; Automation · Networking · IT Support</div>
       </div>

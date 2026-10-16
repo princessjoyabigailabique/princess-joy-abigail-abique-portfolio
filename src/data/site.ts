@@ -5,7 +5,7 @@
  */
 export const SITE = {
   name: "Princess Joy Abigail Abique",
-  shortName: "Abigail",
+  shortName: "Abique",
   title: "Princess Joy Abigail Abique — IT Student Portfolio",
   description:
     "Portfolio of Princess Joy Abigail Abique, a fourth-year BSIT student exploring cybersecurity, AI & automation, networking, and IT support through hands-on projects.",

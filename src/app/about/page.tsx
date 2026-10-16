@@ -33,7 +33,7 @@ export default function About() {
           <div className="about-intro">
             <Portrait className="about-portrait" />
             <div className="about-intro-copy">
-              <p className="kicker">Meet Abigail <span className="eyebrow-note ml-2 normal-case tracking-normal">currently learning, always curious ✦</span></p>
+              <p className="kicker">Meet Abique <span className="eyebrow-note ml-2 normal-case tracking-normal">currently learning, always curious ✦</span></p>
               <h1 className="mt-3 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">The person behind the <span className="grad-text">systems.</span></h1>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">I'm Princess Joy Abigail Abique, a fourth-year BSIT student exploring the intersection of cybersecurity, AI automation, and practical IT solutions. I like understanding how things work, finding ways to make processes better, and turning what I learn into something I can actually use. I'm still growing, experimenting, and figuring out where my interests can take me—and that's part of the journey.</p>
               <div className="mt-6 flex flex-wrap gap-3">
