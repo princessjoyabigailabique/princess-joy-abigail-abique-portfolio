@@ -100,7 +100,7 @@ export default function ItSupport() {
       </section>
 
       <section className="container-page py-9 sm:py-12" aria-labelledby="thm-it-h">
-        <SectionHeader kicker="TryHackMe · completed rooms" id="thm-it-h" title="Operating systems & support learning" intro="Completed rooms related to practical operating systems, command-line use, virtualization, identity, and system fundamentals." />
+        <SectionHeader kicker="TryHackMe · completed rooms" id="thm-it-h" title="Systems & IT fundamentals learning" intro="Completed rooms related to operating systems, command-line use, virtualization, identity, computer hardware, programming fundamentals, and data." />
         <TryHackMeRooms perspective="IT Support / System Administration" />
       </section>
 

@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AlertTriangle, Globe2, Mail, Pause, Play, Terminal, UserRound } from "lucide-react";
-import styles from "./SocLab.module.css";
 
 type EventType = "auth" | "login" | "phish" | "endpoint" | "network";
 type SimEvent = { id: number; type: EventType; msg: string; time: string };
@@ -35,6 +34,7 @@ const LEARN = [
   { title: "Azure / Entra", detail: "Microsoft’s cloud platform and its identity service, where sign-ins and access are managed." },
 ];
 const timeNow = () => new Date().toLocaleTimeString("en-GB");
+const filterButton = "inline-flex min-h-9 items-center rounded-full border border-line bg-[#e8e3ed] px-3 py-2 font-mono text-xs font-medium leading-tight text-[#393044] transition hover:border-accent hover:text-ink aria-pressed:border-accent aria-pressed:bg-[#dcd3e8] aria-pressed:text-[#342344] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent dark:bg-white/[.035] dark:text-violet-100 dark:aria-pressed:bg-violet-500/20";
 
 export default function SocLab() {
   const [feed, setFeed] = useState(INITIAL_EVENTS);
@@ -47,13 +47,12 @@ export default function SocLab() {
   const [learning, setLearning] = useState(0);
   const nextId = useRef(6);
   const root = useRef<HTMLDivElement>(null);
-  const reducedMotion = useRef(false);
   const shown = useMemo(() => feed.filter((event) => filter === "all" || event.type === filter).slice(0, 8), [feed, filter]);
   const active = feed.find((event) => event.id === selected) ?? null;
 
   useEffect(() => {
-    reducedMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reducedMotion.current) setRunning(true);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reducedMotion) setRunning(true);
     const element = root.current;
     if (!element) return;
     const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.15 });
@@ -76,54 +75,61 @@ export default function SocLab() {
   }, [running, visible]);
 
   return (
-    <section className={styles.wrap} aria-labelledby="security-lab-title">
-      <p className={styles.eyebrow}>Interactive Lab</p>
-      <h2 id="security-lab-title" className={styles.title}>Security Lab (Simulated)</h2>
-      <p className={styles.intro}>A hands-on style dashboard to practice reading logs, spotting patterns, and matching them to attacker techniques. This is a simulation built for demonstration — it is not connected to a real environment.</p>
-      <div ref={root} className={styles.window}>
-        <div className={styles.bar}><span>workspace / security-lab / <b>simulated-soc</b></span><span className={styles.badges}><span className={`${styles.tag} ${styles.demo}`}>Simulated data</span><span className={`${styles.tag} ${styles.demo}`}>Not a real environment</span></span></div>
-        <div className={styles.stats}>
-          <div><span className={styles.label}>Simulation status</span><div className={styles.statNum}><span className={`${styles.dot} ${running ? styles.pulse : ""}`} /><span className={styles.online}>{running ? "Running" : "Paused"}</span></div></div>
-          <div><span className={styles.label}>Events</span><div className={styles.statNum}>{events.toLocaleString("en-US")}</div></div>
-          <div><span className={styles.label}>Detections</span><div className={styles.statNum}>{detections}</div></div>
-          <div><span className={styles.label}>Log sources</span><div className={styles.statNum}>{new Set(Object.values(TYPES).map((type) => type.source)).size}</div></div>
+    <section className="mx-auto max-w-5xl text-ink" aria-labelledby="security-lab-title">
+      <p className="mb-1 font-mono text-xs font-semibold uppercase tracking-wide text-accent">Interactive Lab</p>
+      <h2 id="security-lab-title" className="mb-2 text-2xl font-bold tracking-tight sm:text-3xl">Security Lab (Simulated)</h2>
+      <p className="mb-5 max-w-[75ch] text-sm leading-relaxed text-muted">A hands-on style dashboard to practice reading logs, spotting patterns, and matching them to attacker techniques. This is a simulation built for demonstration — it is not connected to a real environment.</p>
+      <div ref={root} className="overflow-hidden rounded-2xl border border-[#c8bfd3] bg-[#e4dfea] text-[#292334] shadow-[0_18px_48px_rgba(45,34,59,.12)] dark:border-white/10 dark:bg-gradient-to-b dark:from-[#17131f] dark:to-[#100d17] dark:text-[#f4f1ff] dark:shadow-[0_20px_60px_-30px_rgba(0,0,0,.8)]">
+        <div className="flex flex-wrap items-center gap-2 border-b border-[#cbc3d4] bg-[#e9e5ee] px-4 py-3 font-mono text-xs text-[#51485d] dark:border-white/10 dark:bg-white/[.025] dark:text-[#b3abc5]">
+          <span>workspace / security-lab / <b className="font-medium text-accent">simulated-soc</b></span>
+          <span className="ml-auto flex flex-wrap gap-2"><span className="rounded-md border border-amber-700/30 bg-amber-100 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-amber-950 dark:border-amber-300/40 dark:bg-amber-300/10 dark:text-amber-200">Simulated data</span><span className="rounded-md border border-amber-700/30 bg-amber-100 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-amber-950 dark:border-amber-300/40 dark:bg-amber-300/10 dark:text-amber-200">Not a real environment</span></span>
         </div>
-        <div className={styles.grid}>
-          <div className={styles.feed}>
-            <div className={styles.feedHead}>
-              <div className={styles.filters} role="group" aria-label="Filter simulated security events">
-                <button type="button" className={styles.chip} aria-pressed={filter === "all"} onClick={() => setFilter("all")}>All</button>
-                {(Object.keys(TYPES) as EventType[]).map((type) => <button type="button" key={type} className={styles.chip} aria-pressed={filter === type} onClick={() => setFilter(type)}>{TYPES[type].label}</button>)}
+        <div className="grid grid-cols-2 gap-px border-b border-[#cbc3d4] bg-[#c8bfd3] sm:grid-cols-4 dark:border-white/10 dark:bg-white/10">
+          <div className="min-w-0 bg-[#eeeaf2] px-3 py-3 sm:px-4 dark:bg-[#14101b]"><span className="font-mono text-[11px] font-medium text-[#51485d] dark:text-[#b3abc5]">Simulation status</span><div className="mt-1 flex min-h-9 items-center gap-2 text-xl font-semibold tabular-nums sm:text-2xl"><span className={`relative size-2 shrink-0 rounded-full ${running ? "bg-emerald-700 after:absolute after:inset-0 after:animate-ping after:rounded-full after:bg-inherit motion-reduce:after:animate-none dark:bg-emerald-400" : "bg-amber-700 dark:bg-amber-300"}`} /><span className="text-base sm:text-lg">{running ? "Running" : "Paused"}</span></div></div>
+          <div className="min-w-0 bg-[#eeeaf2] px-3 py-3 sm:px-4 dark:bg-[#14101b]"><span className="font-mono text-[11px] font-medium text-[#51485d] dark:text-[#b3abc5]">Events</span><div className="mt-1 flex min-h-9 items-center text-2xl font-semibold tabular-nums">{events.toLocaleString("en-US")}</div></div>
+          <div className="min-w-0 bg-[#eeeaf2] px-3 py-3 sm:px-4 dark:bg-[#14101b]"><span className="font-mono text-[11px] font-medium text-[#51485d] dark:text-[#b3abc5]">Detections</span><div className="mt-1 flex min-h-9 items-center text-2xl font-semibold tabular-nums">{detections}</div></div>
+          <div className="min-w-0 bg-[#eeeaf2] px-3 py-3 sm:px-4 dark:bg-[#14101b]"><span className="font-mono text-[11px] font-medium text-[#51485d] dark:text-[#b3abc5]">Log sources</span><div className="mt-1 flex min-h-9 items-center text-2xl font-semibold tabular-nums">{new Set(Object.values(TYPES).map((type) => type.source)).size}</div></div>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+          <div className="min-w-0 border-b border-[#cbc3d4] p-3 sm:p-4 lg:border-b-0 lg:border-r dark:border-white/10">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <div className="flex min-w-0 flex-1 flex-wrap gap-2" role="group" aria-label="Filter simulated security events">
+                <button type="button" className={filterButton} aria-pressed={filter === "all"} onClick={() => setFilter("all")}>All</button>
+                {(Object.keys(TYPES) as EventType[]).map((type) => <button type="button" key={type} className={filterButton} aria-pressed={filter === type} onClick={() => setFilter(type)}>{TYPES[type].label}</button>)}
               </div>
-              <button type="button" className={styles.button} onClick={() => setRunning((value) => !value)}>{running ? <Pause size={14} aria-hidden /> : <Play size={14} aria-hidden />}{running ? "Pause feed" : "Resume feed"}</button>
+              <button type="button" className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-lg border border-[#bcb1ca] bg-[#f0edf4] px-3 text-sm font-semibold text-[#342b40] transition hover:border-accent hover:shadow-[0_0_0_3px_rgba(139,92,246,.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent dark:border-white/20 dark:bg-white/[.035] dark:text-[#f4f1ff]" onClick={() => setRunning((value) => !value)}>{running ? <Pause size={15} aria-hidden /> : <Play size={15} aria-hidden />}{running ? "Pause feed" : "Resume feed"}</button>
             </div>
-            <div className={styles.eventList} role="region" aria-label="Simulated event feed">
+            <div className="grid min-h-[240px] content-start gap-2 sm:min-h-[320px]" role="region" aria-label="Simulated event feed">
               {shown.length ? shown.map((event) => {
                 const info = TYPES[event.type]; const Icon = ICONS[event.type];
-                return <button type="button" key={event.id} className={`${styles.event} ${styles[info.severity]} ${selected === event.id ? styles.selected : ""}`} aria-pressed={selected === event.id} onClick={() => setSelected(event.id)}>
-                  <span className={styles.eventIcon}><Icon size={16} aria-hidden /></span><span className={styles.eventText}><b>{info.label}</b><small>{event.msg}</small></span><time>{event.time}</time>
+                const severity = info.severity === "high" ? "border-rose-700/30 bg-rose-100 text-rose-900 dark:border-rose-400/50 dark:bg-rose-400/10 dark:text-rose-300" : info.severity === "medium" ? "border-amber-700/30 bg-amber-100 text-amber-950 dark:border-amber-300/50 dark:bg-amber-300/10 dark:text-amber-200" : "border-[#c8bfd3] bg-[#f3f0f6] text-[#50465d] dark:border-white/15 dark:bg-white/[.035] dark:text-[#b3abc5]";
+                return <button type="button" key={event.id} className={`grid w-full min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-2.5 gap-y-1 rounded-xl border px-3 py-2.5 text-left transition sm:grid-cols-[auto_minmax(0,1fr)_auto] ${selected === event.id ? "border-accent bg-[#ded4ea] shadow-[0_0_0_2px_rgba(139,92,246,.12)] dark:bg-violet-500/15" : "border-[#d0c8d8] bg-[#f0edf4] hover:border-accent/60 hover:bg-[#eae4f0] dark:border-white/10 dark:bg-white/[.035] dark:hover:bg-white/[.06]"}`} aria-pressed={selected === event.id} onClick={() => setSelected(event.id)}>
+                  <span className={`grid size-9 place-items-center rounded-lg border ${severity}`}><Icon size={17} aria-hidden /></span>
+                  <span className="min-w-0"><b className="block truncate text-sm font-semibold leading-snug text-[#292334] dark:text-[#f4f1ff]">{info.label}</b><small className="mt-0.5 block truncate font-mono text-xs leading-snug text-[#51485d] dark:text-[#c0b7ce]">{event.msg}</small></span>
+                  <time className="col-start-2 font-mono text-xs text-[#51485d] sm:col-start-3 dark:text-[#b3abc5]">{event.time}</time>
                 </button>;
-              }) : <p className={styles.label}>No events of this type yet.</p>}
+              }) : <p className="py-3 text-sm text-[#51485d] dark:text-[#c0b7ce]">No events of this type yet.</p>}
             </div>
           </div>
-          <div className={styles.inspect} aria-live="polite">
+          <div className="grid min-w-0 content-start gap-4 bg-[#eae6ef] p-3 sm:p-4 dark:bg-[#14101b]" aria-live="polite">
             {active ? (() => {
               const info = TYPES[active.type]; const Icon = ICONS[active.type];
+              const severityClass = info.severity === "high" ? "border-rose-700/30 bg-rose-100 text-rose-900 dark:border-rose-400/50 dark:bg-rose-400/10 dark:text-rose-300" : info.severity === "medium" ? "border-amber-700/30 bg-amber-100 text-amber-950 dark:border-amber-300/50 dark:bg-amber-300/10 dark:text-amber-200" : "border-[#c8bfd3] bg-[#f3f0f6] text-[#50465d] dark:border-white/15 dark:bg-white/[.035] dark:text-[#b3abc5]";
               return <>
-                <div><h3 className={styles.inspectTitle}><Icon size={18} aria-hidden />{info.label}<span className={`${styles.tag} ${info.severity === "high" ? styles.warn : info.severity === "medium" ? styles.demo : ""}`}>{info.severity}</span></h3><p className={styles.eventSummary}>{active.msg}</p></div>
-                <dl className={styles.details}><div><dt>Source</dt><dd>{info.source}</dd></div><div><dt>Time</dt><dd className={styles.mono}>{active.time}</dd></div><div className={styles.full}><dt>MITRE ATT&amp;CK</dt><dd>{info.mitre ? <><span className={styles.mono}>{info.mitre[0]}</span> · {info.mitre[1]}</> : <span className={styles.muted}>Baseline activity, no technique mapped</span>}</dd></div></dl>
-                <p className={styles.explain}>{info.explain}</p>
-                <div><p className={styles.label}>Example KQL · for illustration</p><pre className={styles.code} tabIndex={0}><code>{info.query}</code></pre></div>
+                <div><h3 className="flex flex-wrap items-center gap-2 text-base font-semibold text-[#292334] dark:text-[#f4f1ff]"><Icon size={18} aria-hidden />{info.label}<span className={`rounded-md border px-2 py-1 font-mono text-[11px] font-semibold uppercase ${severityClass}`}>{info.severity}</span></h3><p className="mt-2 text-sm leading-relaxed text-[#393044] dark:text-[#ded6e8]">{active.msg}</p></div>
+                <dl className="grid grid-cols-2 gap-3 text-sm"><div><dt className="mb-1 font-mono text-xs font-semibold text-[#51485d] dark:text-[#b3abc5]">Source</dt><dd>{info.source}</dd></div><div><dt className="mb-1 font-mono text-xs font-semibold text-[#51485d] dark:text-[#b3abc5]">Time</dt><dd className="font-mono">{active.time}</dd></div><div className="col-span-2"><dt className="mb-1 font-mono text-xs font-semibold text-[#51485d] dark:text-[#b3abc5]">MITRE ATT&amp;CK</dt><dd>{info.mitre ? <><span className="font-mono">{info.mitre[0]}</span> · {info.mitre[1]}</> : <span className="text-[#51485d] dark:text-[#c0b7ce]">Baseline activity, no technique mapped</span>}</dd></div></dl>
+                <p className="text-sm leading-relaxed text-[#393044] dark:text-[#ded6e8]">{info.explain}</p>
+                <div><p className="mb-2 font-mono text-xs font-semibold text-[#51485d] dark:text-[#c0b7ce]">Example KQL · for illustration</p><pre className="overflow-x-auto rounded-xl border border-[#c8bfd3] bg-[#ddd7e5] p-3 font-mono text-xs leading-relaxed text-[#30283a] dark:border-white/10 dark:bg-[#0a0714] dark:text-[#d1c4e4]" tabIndex={0}><code>{info.query}</code></pre></div>
               </>;
-            })() : <div><h3 className={styles.inspectHeading}>Event inspector</h3><p className={styles.muted}>Select an event to see what it means, which technique it maps to, and an example KQL query.</p></div>}
+            })() : <div><h3 className="text-base font-semibold">Event inspector</h3><p className="mt-2 text-sm leading-relaxed text-[#51485d] dark:text-[#c0b7ce]">Select an event to see what it means, which technique it maps to, and an example KQL query.</p></div>}
           </div>
         </div>
-        <div className={styles.learn}>
-          <h3>What I’m learning</h3><p className={styles.learnIntro}>Select a topic for a short definition.</p>
-          <div className={styles.chips} role="group" aria-label="Security topics">
-            {LEARN.map((item, index) => <button type="button" key={item.title} className={styles.chip} aria-pressed={learning === index} onClick={() => setLearning(index)}>{item.title}</button>)}
+        <div className="border-t border-[#cbc3d4] bg-[#e9e5ee] p-4 sm:p-5 dark:border-white/10 dark:bg-white/[.02]">
+          <h3 className="text-base font-semibold text-[#292334] dark:text-[#f4f1ff]">What I’m learning</h3><p className="mt-1 text-sm text-[#51485d] dark:text-[#c0b7ce]">Select a topic for a short definition.</p>
+          <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Security topics">
+            {LEARN.map((item, index) => <button type="button" key={item.title} className={filterButton} aria-pressed={learning === index} onClick={() => setLearning(index)}>{item.title}</button>)}
           </div>
-          <div className={styles.definition} aria-live="polite"><b>{LEARN[learning].title}.</b> {LEARN[learning].detail}</div>
+          <div className="mt-3 min-h-[4.5rem] rounded-xl border border-[#c8bfd3] bg-[#f0edf4] p-3.5 text-sm leading-relaxed text-[#393044] dark:border-white/10 dark:bg-white/[.035] dark:text-[#d1c4e4]" aria-live="polite"><b className="text-[#292334] dark:text-[#f4f1ff]">{LEARN[learning].title}.</b> {LEARN[learning].detail}</div>
         </div>
       </div>
     </section>

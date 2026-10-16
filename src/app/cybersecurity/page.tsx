@@ -45,11 +45,6 @@ export default function Cyber() {
         <TryHackMeRooms perspective="Cybersecurity" />
       </section>
 
-      <section className="container-page py-10" aria-labelledby="unclassified-h">
-        <SectionHeader kicker="TryHackMe · other completed rooms" id="unclassified-h" title="General learning & challenge rooms" intro="These completed rooms are general platform, research, programming, or event challenges rather than a clear fit for one of the four technical perspectives." />
-        <TryHackMeRooms perspective="Unclassified" />
-      </section>
-
       <section className="container-page py-10" aria-labelledby="labs-h">
         <SectionHeader kicker="Evidence" id="labs-h" title="Lab & write-up library" intro="Technical write-ups will be added when I can include the steps, evidence, findings and lessons from my own work." />
         <div className="card flex flex-col items-center gap-3 border-dashed p-10 text-center">
@@ -65,7 +60,15 @@ export default function Cyber() {
 
       <section className="container-page py-10" aria-labelledby="skills-h">
         <SectionHeader kicker="Skills & tools" id="skills-h" title="Topics I’m learning" intro="These are learning topics — not claims of professional mastery." />
-        <ul className="flex flex-wrap gap-2">{TOPICS.map((t) => <li key={t} className="chip px-4 py-2 text-sm">{t}</li>)}</ul>
+        <div className="group overflow-hidden rounded-2xl border border-line bg-surface/60 py-4" aria-label="Cybersecurity topics I’m learning">
+          <div className="flex w-max motion-safe:animate-[tools-marquee-right_36s_linear_infinite] motion-safe:group-hover:[animation-play-state:paused] motion-safe:group-focus-within:[animation-play-state:paused] motion-reduce:animate-none">
+            {[0, 1].map((copy) => (
+              <ul key={copy} aria-hidden={copy === 1 || undefined} aria-label={copy === 0 ? "Topics I’m learning" : undefined} className="flex shrink-0 gap-2 pr-2">
+                {TOPICS.map((topic) => <li key={topic} className="chip px-4 py-2 text-sm">{topic}</li>)}
+              </ul>
+            ))}
+          </div>
+        </div>
       </section>
 
       <CtaBand title="See the credentials behind the learning" body="Courses and activities are listed with their verification status.">

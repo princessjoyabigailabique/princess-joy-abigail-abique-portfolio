@@ -1,11 +1,32 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ExternalLink, FileText, Search, X } from "lucide-react";
+import { ArrowUpRight, ExternalLink, FileText, Search, X } from "lucide-react";
+import Image from "next/image";
 import { CREDENTIALS, type Credential } from "@/data/credentials";
-import { Placeholder } from "./ui";
 
 // Drafts are hidden in production builds unless NEXT_PUBLIC_SHOW_DRAFT_CREDENTIALS=true (e.g. for Preview deployments).
 const hideDrafts = process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_SHOW_DRAFT_CREDENTIALS !== "true";
+
+function CertificatePreview({ credential, size }: { credential: Credential; size: "card" | "large" }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const isLarge = size === "large";
+  const frameClass = isLarge
+    ? "relative mx-auto h-[min(58vh,38rem)] w-full overflow-hidden rounded-xl border border-line bg-[#e7e2ec] dark:bg-[#0b0912]"
+    : "relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-line bg-[#e7e2ec] dark:bg-[#0b0912]";
+
+  if (isLarge && (!credential.imageUrl || imageFailed) && credential.pdfUrl) {
+    return <iframe title={`${credential.title} certificate PDF preview`} src={credential.pdfUrl} className={frameClass} />;
+  }
+
+  if (credential.imageUrl && !imageFailed) {
+    const preview = <div className={frameClass}><Image src={credential.imageUrl} alt={`${credential.title} certificate`} fill sizes={isLarge ? "(max-width: 768px) 94vw, 720px" : "(max-width: 768px) 100vw, 33vw"} className="object-contain p-2" onError={() => setImageFailed(true)} /></div>;
+    return isLarge ? <a href={credential.imageUrl} target="_blank" rel="noopener noreferrer" title="Open full-size certificate image" className="block">{preview}<p className="mt-2 text-center text-xs text-muted">Open the full-size image</p></a> : preview;
+  }
+
+  return <div className={`${frameClass} grid place-items-center p-4 text-center text-muted`}>
+    <div><FileText className="mx-auto h-8 w-8 text-accent/80" aria-hidden /><p className="mt-2 text-xs font-medium">{credential.pdfUrl && isLarge ? "PDF certificate preview" : "Certificate image unavailable"}</p></div>
+  </div>;
+}
 
 function Detail({ c, onClose }: { c: Credential; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -82,39 +103,7 @@ function Detail({ c, onClose }: { c: Credential; onClose: () => void }) {
         )}
 
         {/* Certificate preview */}
-        <div className="mt-5 overflow-hidden rounded-xl border border-line bg-bg/50 p-3 sm:p-4">
-          {c.imageUrl ? (
-            <a
-              href={c.imageUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Open full-size certificate image"
-              className="block"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={c.imageUrl}
-                alt={`${c.title} certificate`}
-                className="mx-auto max-h-[55vh] w-auto max-w-full rounded-lg object-contain"
-              />
-              <p className="mt-3 text-center text-xs text-muted">
-                Click certificate to open full-size image
-              </p>
-            </a>
-          ) : c.pdfUrl ? (
-            <div className="py-8 text-center">
-              <FileText className="mx-auto h-12 w-12 text-accent" />
-              <p className="mt-3 font-medium">PDF certificate available</p>
-              <p className="mt-1 text-sm text-muted">
-                Open the original document to view your certificate.
-              </p>
-            </div>
-          ) : (
-            <div className="py-8 text-center text-sm text-muted">
-              Certificate preview not available yet.
-            </div>
-          )}
-        </div>
+        <div className="mt-5"><CertificatePreview credential={c} size="large" /></div>
 
         {/* Actions */}
         <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -181,12 +170,11 @@ export default function CredentialBrowser() {
       ) : (
         <ul className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {list.map((c) => (
-            <li key={c.id} className="card card-hover flex flex-col p-5">
-              <div className="flex flex-wrap gap-2"><span className="chip">{c.type}</span>{c.status === "draft" && <span className="badge border-warn/50 text-warn">Draft</span>}</div>
-              <h3 className="mt-3 font-semibold">{c.title}</h3>
-              <p className="text-sm text-muted">{c.issuer}</p>
-              <p className="mt-2 flex-1 text-xs text-muted">{c.skills.join(" · ")}</p>
-              <button onClick={() => setOpen(c)} className="btn-ghost mt-4 self-start">View details</button>
+            <li key={c.id} className="card card-hover flex flex-col p-3">
+              <CertificatePreview credential={c} size="card" />
+              <div className="mt-3 flex items-start justify-between gap-2"><h3 className="line-clamp-2 min-h-[2.75rem] font-semibold leading-snug">{c.title}</h3>{c.status === "draft" && <span className="badge shrink-0 border-warn/50 text-warn">Draft</span>}</div>
+              <p className="mt-1 min-h-5 text-sm text-muted">{c.issuer}</p>
+              <button onClick={() => setOpen(c)} className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-accent/25 bg-accent/10 px-3 text-sm font-semibold text-accent transition hover:border-accent/50 hover:bg-accent/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">View Details <ArrowUpRight className="h-4 w-4" aria-hidden /></button>
             </li>
           ))}
         </ul>

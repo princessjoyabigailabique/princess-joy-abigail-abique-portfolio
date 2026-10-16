@@ -52,11 +52,6 @@ export default function Networking() {
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{FUND.map(([t, d]) => <li key={t} className="card p-4"><p className="font-semibold">{t}</p><p className="text-sm text-muted">{d}</p></li>)}</ul>
       </section>
 
-      <section className="container-page py-10" aria-labelledby="doc-h">
-        <SectionHeader kicker="Documentation" id="doc-h" title="How I’ll document each lab" />
-        <ol className="grid gap-3 sm:grid-cols-3 lg:grid-cols-6">{["Objective", "Topology", "Configuration", "Verification (ping, show commands)", "Troubleshooting notes", "Lessons learned"].map((s, i) => <li key={s} className="card p-3 text-sm"><span className="font-mono text-accent">0{i + 1}</span><p className="font-semibold">{s}</p></li>)}</ol>
-      </section>
-
       <CtaBand title="Always learning, always exploring." body="More labs will be added with evidence as I complete them.">
         <LinkButton href="/certifications">View Certifications</LinkButton>
         <LinkButton href="/resume" variant="ghost">Resume</LinkButton>
