@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FileText, Menu, X } from "lucide-react";
 import { NAV } from "@/data/site";
 import ThemeToggle from "./ThemeToggle";
+import AbiqueMark from "./AbiqueMark";
 
 export default function Header() {
   const pathname = usePathname();
@@ -25,7 +25,7 @@ export default function Header() {
     <header className="site-header sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-xl">
       <div className="container-page flex h-16 items-center justify-between gap-3">
         <Link href="/" className="brand-signature flex items-center gap-2 font-bold tracking-wide" aria-label="Abique — home">
-          <Image src="/images/abique-emblem.png" alt="" width={36} height={36} priority className="h-9 w-9 rounded-full object-cover" />
+          <AbiqueMark size={36} priority />
           <span className="brand-word">ABIQUE<span className="brand-dot">.</span></span>
         </Link>
 

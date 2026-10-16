@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { AREAS, PROJECTS } from "@/data/projects";
 import AreaIcon from "./AreaIcon";
 import { StatusBadge } from "./ui";
 import styles from "./CareerSelector.module.css";
+import AbiqueMark from "./AbiqueMark";
 
 const FEATURES: Record<string, string> = {
   cybersecurity: "security-lab",
@@ -28,7 +28,7 @@ export default function CareerSelector() {
           <circle cx="50" cy="50" r="15" className={styles.ring} />
         </svg>
         <div className={styles.core}>
-          <span className={styles.coreIcon}><Image src="/images/abique-emblem.png" alt="" width={64} height={64} className="h-14 w-14 rounded-full object-cover" /></span>
+          <span className={styles.coreIcon}><AbiqueMark size={56} /></span>
           <span className={styles.coreName}>ABIQUE</span>
           <span className={styles.coreRole}>DIGITAL WORKSPACE</span>
         </div>

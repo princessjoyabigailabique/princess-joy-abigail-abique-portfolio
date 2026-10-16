@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import AbiqueMark from "./AbiqueMark";
 
 const MINIMUM_SHOW_MS = 2_580;
 const EXIT_MS = 420;
@@ -61,7 +61,7 @@ export default function LoadingIntro() {
       </div>
       <div className="intro-content">
         <div className="intro-emblem-wrap">
-          <Image src="/images/abique-emblem.png" alt="" width={128} height={128} priority className="intro-emblem" />
+          <AbiqueMark size={96} priority />
           <span className="intro-orbit intro-orbit-one" aria-hidden="true" />
           <span className="intro-orbit intro-orbit-two" aria-hidden="true" />
         </div>
