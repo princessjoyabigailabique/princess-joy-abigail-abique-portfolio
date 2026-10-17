@@ -3,11 +3,6 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 import { usePathname } from "next/navigation";
 
-const LEAVES = [
-  { className: "garden-vine garden-vine-left", flip: false },
-  { className: "garden-vine garden-vine-right", flip: true },
-];
-
 const PARTICLES = Array.from({ length: 36 }, (_, index) => {
   const n = index + 1;
   const x = (n * 37 + 13) % 96;
@@ -96,6 +91,31 @@ export default function AmbientGarden() {
   }, []);
 
   useEffect(() => {
+    const garden = gardenRef.current;
+    if (!garden || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      if (document.hidden) return;
+      const depth = Math.min(window.scrollY * 0.018, 32);
+      const progress = Math.min(window.scrollY / 1400, 1);
+      garden.style.setProperty("--scroll-left", `${-depth}px`);
+      garden.style.setProperty("--scroll-right", `${depth * 0.72}px`);
+      garden.style.setProperty("--flower-opacity", `${0.11 + progress * 0.1}`);
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const onVisibility = () => { if (document.hidden && frame) { cancelAnimationFrame(frame); frame = 0; } else onScroll(); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("visibilitychange", onVisibility);
+    update();
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, []);
+
+  useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
 
     const sections = Array.from(document.querySelectorAll<HTMLElement>(
@@ -131,16 +151,18 @@ export default function AmbientGarden() {
       <div className="garden-bloom garden-bloom-one" />
       <div className="garden-bloom garden-bloom-two" />
       <div className="garden-dust" />
+      <div className="garden-rays" />
       <div className="garden-pointer-glow" />
-      {LEAVES.map(({ className, flip }) => (
-        <svg className={className} viewBox="0 0 180 380" key={className} focusable="false">
-          {flip && <g transform="translate(180 0) scale(-1 1)"><Vine /></g>}
-          {!flip && <Vine />}
-        </svg>
-      ))}
+      <GardenClover className="garden-clover" />
+      <div className="garden-florals">
+        {[1, 2, 3, 4].map((flower) => <GardenFlower key={flower} className={`garden-flower garden-flower-${flower}`} />)}
+      </div>
       <svg className="garden-trails" viewBox="0 0 1440 900" preserveAspectRatio="none" focusable="false">
         <path d="M-80 590C180 510 245 715 480 620S790 415 1010 510s310 40 520-75" />
         <path d="M-90 250C160 330 270 190 500 290s365 180 570 70 335-30 470 55" />
+        <path className="garden-circuit" d="M-40 755H175l44-44h132l38 38h176m302-792v112l-42 42v74l42 42h135l42 42h166" />
+        <circle className="garden-circuit-node" cx="351" cy="711" r="3" />
+        <circle className="garden-circuit-node" cx="874" cy="227" r="3" />
       </svg>
       <div className="garden-fireflies">
         {PARTICLES.map(({ className, style }, i) => <i className={className} style={style} key={i} />)}
@@ -150,17 +172,29 @@ export default function AmbientGarden() {
   );
 }
 
-function Vine() {
+function GardenClover({ className }: { className: string }) {
   return (
-    <>
-      <path className="vine-stem" d="M153 379C135 326 155 287 123 242s-13-82 5-115 4-69-8-103" />
-      <path className="vine-stem vine-stem-fine" d="M131 305c-22-26-48-31-79-29m84-21c27-20 45-28 72-25m-80-77c-27-17-44-35-52-58m69 4c17-14 30-32 38-53" />
-      <path className="vine-leaf" d="M55 276c12-22 36-26 59-3-18 18-40 23-59 3Z" />
-      <path className="vine-leaf" d="M171 249c-19-19-43-18-66 4 18 15 42 17 66-4Z" />
-      <path className="vine-leaf" d="M49 121c13-21 36-24 57-2-17 17-39 21-57 2Z" />
-      <path className="vine-leaf" d="M169 96c-18-18-40-16-61 5 17 14 39 16 61-5Z" />
-      <path className="vine-vein" d="m57 275 48-1m58-18 36-7m-147-128 45-1m32-23 39-9" />
-      <circle className="vine-node" cx="126" cy="128" r="2.5" />
-    </>
+    <svg className={className} viewBox="0 0 560 520" preserveAspectRatio="xMidYMid meet" focusable="false">
+      <g transform="translate(280 0) scale(1.65 1) translate(-160 0)">
+        <path className="clover-stem" d="M158 218C153 290 140 377 101 506m52-192c26 48 60 91 112 135m-126-88c-35 43-64 73-100 101" />
+        <path className="clover-leaf" d="M160 231c-43-37-66-78-58-121 6-34 39-44 58-14 19-30 52-20 58 14 8 43-15 84-58 121Z" />
+        <path className="clover-leaf" d="M151 239c-55-5-99-27-117-66-15-32 7-59 41-45-2-36 30-51 57-25 34 32 41 83 19 136Z" />
+        <path className="clover-leaf" d="M169 239c55-5 99-27 117-66 15-32-7-59-41-45 2-36-30-51-57-25-34 32-41 83-19 136Z" />
+        <path className="clover-vein" d="M160 224V105m-5 126-59-80m63 80 59-80m-68 81-89-39m97 39 89-39m-97 48-51 166m59-166 72 142m-85-105-77 107" />
+        <circle className="clover-dewdrop" cx="160" cy="220" r="3" />
+      </g>
+    </svg>
+  );
+}
+
+function GardenFlower({ className }: { className: string }) {
+  return (
+    <svg className={className} viewBox="0 0 100 100" focusable="false">
+      <g className="garden-flower-petals">
+        {[0, 72, 144, 216, 288].map((angle) => <path key={angle} transform={`rotate(${angle} 50 50)`} d="M50 49C35 39 35 20 50 8c15 12 15 31 0 41Z" />)}
+      </g>
+      <circle className="garden-flower-center" cx="50" cy="50" r="8" />
+      <circle className="garden-flower-core" cx="50" cy="50" r="3" />
+    </svg>
   );
 }

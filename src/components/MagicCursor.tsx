@@ -5,13 +5,11 @@ import { useEffect, useRef } from "react";
 /** A passive pointer light: the browser's native cursor remains visible and fully functional. */
 export default function MagicCursor() {
   const lightRef = useRef<HTMLDivElement>(null);
-  const rippleRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const light = lightRef.current;
-    const ripple = rippleRef.current;
     if (!light || !finePointer.matches || reducedMotion.matches) return;
 
     let frame = 0;
@@ -37,15 +35,6 @@ export default function MagicCursor() {
       if (!frame) frame = requestAnimationFrame(animate);
     };
     const leave = () => { visible = false; light.classList.remove("is-visible"); };
-    const click = (event: PointerEvent) => {
-      if (event.pointerType !== "mouse" || !ripple) return;
-      ripple.style.left = `${event.clientX}px`;
-      ripple.style.top = `${event.clientY}px`;
-      ripple.animate([
-        { opacity: 0.58, transform: "translate(-50%, -50%) scale(.35)" },
-        { opacity: 0, transform: "translate(-50%, -50%) scale(1.7)" },
-      ], { duration: 420, easing: "cubic-bezier(.2,.7,.25,1)" });
-    };
     const visibility = () => {
       if (document.hidden) {
         if (frame) cancelAnimationFrame(frame);
@@ -57,7 +46,6 @@ export default function MagicCursor() {
       if (reducedMotion.matches || !finePointer.matches) leave();
     };
     document.addEventListener("pointermove", move, { passive: true });
-    document.addEventListener("pointerdown", click, { passive: true });
     document.documentElement.addEventListener("pointerleave", leave);
     document.addEventListener("visibilitychange", visibility);
     finePointer.addEventListener("change", preference);
@@ -65,7 +53,6 @@ export default function MagicCursor() {
     return () => {
       if (frame) cancelAnimationFrame(frame);
       document.removeEventListener("pointermove", move);
-      document.removeEventListener("pointerdown", click);
       document.documentElement.removeEventListener("pointerleave", leave);
       document.removeEventListener("visibilitychange", visibility);
       finePointer.removeEventListener("change", preference);
@@ -76,7 +63,6 @@ export default function MagicCursor() {
   return (
     <div className="pointer-ambience" aria-hidden="true">
       <div className="pointer-ambience-light" ref={lightRef} />
-      <span className="pointer-ambience-ripple" ref={rippleRef} />
     </div>
   );
 }

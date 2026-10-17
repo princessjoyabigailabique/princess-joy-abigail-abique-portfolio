@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, FileText } from "lucide-react";
+import { ArrowRight, FileText, Leaf } from "lucide-react";
 import CareerSelector from "@/components/CareerSelector";
 import ProjectCards from "@/components/ProjectCards";
 import Portrait from "@/components/Portrait";
@@ -15,7 +15,7 @@ export default function Home() {
         <div className="container-page relative">
         <div className="grid grid-cols-[minmax(0,1fr)] items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
           <div>
-            <p className="chip gap-2 border-accent/30"><span className="h-2 w-2 rounded-full bg-good shadow-[0_0_10px_rgb(var(--good)/.8)]" aria-hidden /> Welcome to my digital workspace <span className="font-mono text-[10px] text-muted">v.01</span></p>
+            <p className="chip journey-label gap-2 border-accent/30"><span className="h-2 w-2 rounded-full bg-good shadow-[0_0_10px_rgb(var(--good)/.8)]" aria-hidden /> MY JOURNEY, STILL GROWING <Leaf className="journey-leaf h-3.5 w-3.5 text-good" aria-hidden /></p>
             <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-start">
               <Portrait className="h-56 w-44 shrink-0" />
               <div>
@@ -70,14 +70,14 @@ export default function Home() {
       </section>
 
       <section className="container-page py-10" aria-labelledby="featured-h">
-        <SectionHeader kicker="Featured work" id="featured-h" title="Selected projects and activities" intro="Statuses are shown exactly as they are — nothing here is presented as production work." />
+        <SectionHeader kicker="A garden of projects" id="featured-h" title="Selected projects and activities" intro="Projects and activities at different stages, with each status kept clear and accurate." />
         <ProjectCards slugs={["ai-email-operations-assistant", "security-lab-simulated", "packet-tracer-device-setup", "support-ticket-simulation", "securedesk-ai"]} extra={<li><Link href="/about#academic" className="card card-hover flex h-full min-h-[10rem] flex-col items-start justify-center gap-2 border-dashed p-5"><span className="font-semibold">More academic projects</span><span className="text-sm text-muted">DOUGH DELIGHT CAFE POS, ExamEase and ITRACKIT.</span><span className="inline-flex items-center gap-1 text-sm font-semibold text-accent">See them <ArrowRight className="h-4 w-4" aria-hidden /></span></Link></li>} />
       </section>
 
       <section className="container-page py-10" aria-labelledby="progress-h">
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="card p-6">
-            <p className="kicker">Current learning</p>
+            <p className="kicker">Seeds & steady growth</p>
             <h2 id="progress-h" className="section-title mt-1">Progress, not just promises.</h2>
             <ul className="mt-5 space-y-3 text-sm">
               {[
@@ -87,17 +87,17 @@ export default function Home() {
                 ["Cisco Packet Tracer device-setup activity", "completed"],
               ].map(([t, s]) => (
                 <li key={t} className="flex items-center justify-between gap-3 border-b border-line pb-3 last:border-0">
-                  <span>{t}</span><StatusBadge status={s as "completed" | "in-progress"} />
+                  <span>{t}</span><StatusBadge status={s as "completed" | "in-progress"} label={s === "completed" ? "Bloomed · completed" : "Growing · in progress"} />
                 </li>
               ))}
             </ul>
           </div>
           <div className="card p-6">
-            <p className="kicker">Beyond the projects</p>
+            <p className="kicker">Explore the garden</p>
             <h2 className="section-title mt-1">The bigger picture.</h2>
             <ul className="mt-5 space-y-3">
               {[
-                ["/certifications", "Certifications", "Courses, activities and credentials — with their verification status."],
+                ["/certifications", "Certifications", "Completed credentials and learning activities, with verification details."],
                 ["/about", "About me", "My background, interests and approach."],
                 ["/resume", "Resume", "Choose the AI & Automation or Cybersecurity version."],
               ].map(([href, t, d]) => (

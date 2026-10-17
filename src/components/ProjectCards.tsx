@@ -5,6 +5,13 @@ import { X } from "lucide-react";
 import { PROJECTS, type Project } from "@/data/projects";
 import { StatusBadge } from "./ui";
 
+function gardenStage(status: Project["status"]) {
+  if (status === "completed") return "Bloomed · Completed";
+  if (status === "in-progress") return "Growing · In progress";
+  if (status === "planned") return "Seed · Planned";
+  return undefined;
+}
+
 function ProjectVisual({ area }: { area: Project["area"] }) {
   if (area === "ai-automation") return <div className="project-preview preview-flow" aria-hidden><span className="preview-label">FLOW / LOCAL DEMO</span><div className="preview-nodes"><i>IN</i><b /><i>AI</i><b /><i>OUT</i></div><div className="preview-caption">parse <span>→</span> decide <span>→</span> route</div></div>;
   if (area === "networking") return <div className="project-preview preview-network" aria-hidden><span className="preview-label">TOPOLOGY / LAB</span><svg viewBox="0 0 300 92"><path d="M150 19 79 68M150 19 221 68M79 68 32 82M79 68 112 82M221 68 188 82M221 68 268 82"/><circle cx="150" cy="19" r="10"/><rect x="65" y="57" width="28" height="20" rx="4"/><rect x="207" y="57" width="28" height="20" rx="4"/><circle cx="32" cy="82" r="5"/><circle cx="112" cy="82" r="5"/><circle cx="188" cy="82" r="5"/><circle cx="268" cy="82" r="5"/></svg></div>;
@@ -32,7 +39,7 @@ function Dialog({ project, onClose }: { project: Project; onClose: () => void })
           <h3 id="proj-title" className="text-xl font-bold">{project.title}</h3>
           <button onClick={onClose} aria-label="Close project details" className="rounded-lg p-1 hover:bg-surface2"><X className="h-5 w-5" /></button>
         </div>
-        <div className="mt-2"><StatusBadge status={project.status} /></div>
+        <div className="mt-2"><StatusBadge status={project.status} label={gardenStage(project.status)} /></div>
         <p className="mt-4 text-sm text-muted">{project.summary}</p>
         {project.tools.length > 0 && (
           <ul className="mt-4 flex flex-wrap gap-2">{project.tools.map((t) => <li key={t} className="chip">{t}</li>)}</ul>
@@ -61,7 +68,7 @@ export default function ProjectCards({ slugs, extra }: { slugs?: string[]; extra
             <ProjectVisual area={p.area} />
             <div className="flex items-start justify-between gap-3">
               <h3 className="font-semibold leading-snug">{p.title}</h3>
-              <StatusBadge status={p.status} />
+              <StatusBadge status={p.status} label={gardenStage(p.status)} />
             </div>
             <p className="mt-2 flex-1 text-sm text-muted">{p.summary}</p>
             {p.tools.length > 0 && (

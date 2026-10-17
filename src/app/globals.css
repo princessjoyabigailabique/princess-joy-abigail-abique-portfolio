@@ -309,14 +309,6 @@ main, .site-footer { position: relative; }
 .ambient-garden[data-page="it-support"] .garden-haze { background: radial-gradient(ellipse at 7% 22%, rgb(139 152 135 / .12), transparent 38%), radial-gradient(ellipse at 94% 80%, rgb(170 112 154 / .1), transparent 40%); }
 .ambient-garden[data-page="contact"] .garden-haze { opacity: .48; background: radial-gradient(ellipse at 50% 95%, rgb(171 112 168 / .2), transparent 42%), radial-gradient(ellipse at 8% 16%, rgb(155 134 188 / .1), transparent 38%); }
 :root[data-theme="light"] .garden-haze { opacity: .2; }
-.garden-vine { position: absolute; width: clamp(8rem, 16vw, 15rem); height: min(76vh, 39rem); opacity: .24; overflow: visible; filter: drop-shadow(0 0 9px rgb(var(--accent) / .16)); transform-origin: 50% 90%; animation: garden-sway 24s ease-in-out infinite alternate; }
-.garden-vine-left { left: -3.2rem; bottom: -5rem; }
-.garden-vine-right { right: -3.2rem; top: 8%; opacity: .19; transform: rotate(180deg); animation-delay: -9s; }
-.vine-stem { fill: none; stroke: rgb(var(--leaf) / .56); stroke-width: 1.4; stroke-linecap: round; }
-.vine-stem-fine { stroke: rgb(var(--accent) / .4); stroke-width: 1; }
-.vine-leaf { fill: rgb(var(--leaf) / .11); stroke: rgb(var(--accent) / .58); stroke-width: 1.2; }
-.vine-vein { fill: none; stroke: rgb(var(--accent) / .47); stroke-width: .8; stroke-linecap: round; }
-.vine-node { fill: rgb(var(--accent-2) / .84); filter: drop-shadow(0 0 4px rgb(var(--accent-2) / .7)); }
 .garden-fireflies { position: absolute; inset: 0; opacity: .72; }
 .firefly { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #ecd9b9; box-shadow: 0 0 5px 1px rgb(224 195 229 / .38), 0 0 13px rgb(200 147 211 / .18); animation: firefly-float 16s ease-in-out infinite; }
 .firefly-1 { left: 12%; top: 28%; animation-duration: 17s; }
@@ -376,9 +368,6 @@ html[data-intro-pending] :focus-visible { position: relative; z-index: 214748260
 @keyframes intro-ellipsis { from { width: .15em; } to { width: 1.1em; } }
 @keyframes intro-star-drift { from { opacity: .24; transform: translate3d(0, 2px, 0) scale(.8); } to { opacity: .74; transform: translate3d(3px, -3px, 0) scale(1); } }
 @media (max-width: 640px) {
-  .garden-vine { width: 6rem; height: 47vh; opacity: .14; }
-  .garden-vine-left { left: -3.7rem; bottom: -2rem; }
-  .garden-vine-right { right: -3.7rem; top: 14%; }
   .garden-fireflies { opacity: .48; }
   .home-hero::after { top: auto; right: -1.5rem; bottom: -3rem; width: 9rem; opacity: .1; }
   .page-atmosphere::after { width: 8rem; right: -2rem; top: auto; bottom: -2.3rem; transform: none; opacity: .15; }
@@ -406,7 +395,6 @@ html[data-intro-pending] :focus-visible { position: relative; z-index: 214748260
 .garden-trails path { fill: none; stroke: rgb(var(--accent-2) / .12); stroke-width: 1; stroke-dasharray: 2 22; stroke-linecap: round; animation: trail-glide 54s linear infinite; }
 .garden-trails path + path { stroke: rgb(219 133 207 / .1); stroke-dasharray: 1 28; animation-duration: 67s; animation-direction: reverse; }
 :root[data-theme="light"] .garden-trails path { stroke: rgb(115 79 145 / .09); }
-.garden-vine { z-index: 2; }
 .garden-fireflies { z-index: 3; opacity: 1; }
 .firefly { position: absolute; width: var(--particle-size, 3px); height: var(--particle-size, 3px); border-radius: 50%; opacity: .72; background: var(--particle-color, #d6a6f5); box-shadow: 0 0 4px 1px color-mix(in srgb, var(--particle-color, #d6a6f5) 62%, transparent), 0 0 12px 3px color-mix(in srgb, var(--particle-color, #d6a6f5) 32%, transparent), 0 0 25px 5px color-mix(in srgb, var(--particle-color, #d6a6f5) 17%, transparent); animation-name: firefly-path-a; animation-duration: var(--duration, 30s); animation-delay: var(--delay, 0s); animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-direction: alternate; will-change: transform, opacity; transition: filter .25s ease; }
 .firefly-tone-0 { --particle-color: #c99af2; }
@@ -439,6 +427,34 @@ html[data-intro-pending] :focus-visible { position: relative; z-index: 214748260
   .firefly { opacity: .52; transform: none !important; }
   .garden-twinkle { opacity: .28; }
 }
+.garden-rays { position: absolute; z-index: 1; inset: -16% -25%; opacity: .15; pointer-events: none; background: linear-gradient(112deg, transparent 27%, rgb(167 119 224 / .055) 36%, rgb(198 151 238 / .1) 39%, transparent 47%), linear-gradient(104deg, transparent 61%, rgb(212 124 198 / .055) 68%, transparent 75%); transform: translate3d(-3%,0,0) rotate(-2deg); animation: rays-drift 38s ease-in-out infinite alternate; }
+.ambient-garden[data-page="home"] .garden-haze { opacity: .42; background: radial-gradient(ellipse at 75% 12%, rgb(165 105 197 / .2), transparent 43%), radial-gradient(ellipse at 22% 28%, rgb(111 94 167 / .14), transparent 42%), radial-gradient(ellipse at 92% 73%, rgb(190 104 171 / .1), transparent 44%); }
+.ambient-garden[data-page="home"] .garden-bloom-one { opacity: .34; top: -20%; left: 14%; }
+.ambient-garden[data-page="home"] .garden-rays { opacity: .22; }
+:root[data-theme="light"] .ambient-garden[data-page="home"] .garden-haze { opacity: .27; background: radial-gradient(ellipse at 75% 12%, rgb(154 112 173 / .15), transparent 43%), radial-gradient(ellipse at 22% 28%, rgb(121 113 159 / .08), transparent 42%), radial-gradient(ellipse at 92% 73%, rgb(177 112 163 / .08), transparent 44%); }
+:root[data-theme="light"] .garden-rays { opacity: .075; background: linear-gradient(112deg, transparent 27%, rgb(126 90 163 / .06) 37%, transparent 47%), linear-gradient(104deg, transparent 61%, rgb(163 97 152 / .045) 69%, transparent 75%); }
+@keyframes rays-drift { from { transform: translate3d(-3%, -1%, 0) rotate(-2deg); } to { transform: translate3d(3%, 2%, 0) rotate(1deg); } }
+.garden-haze::before, .garden-haze::after { position: absolute; inset: 0; content: ""; pointer-events: none; transition: opacity .7s ease; }
+.garden-haze::before { opacity: .72; background: radial-gradient(ellipse at 58% 20%, rgb(134 97 172 / .12), transparent 46%), linear-gradient(180deg, rgb(14 11 24 / .06), transparent 44%); }
+.garden-haze::after { opacity: 0; background: radial-gradient(ellipse at 68% 19%, rgb(189 164 190 / .15), transparent 46%), radial-gradient(ellipse at 20% 65%, rgb(159 174 158 / .1), transparent 48%), linear-gradient(180deg, rgb(231 222 226 / .08), transparent 42%); }
+:root[data-theme="light"] .garden-haze::before { opacity: 0; }
+:root[data-theme="light"] .garden-haze::after { opacity: .8; }
+.garden-florals { position: absolute; z-index: 2; inset: 0; overflow: hidden; pointer-events: none; }
+.garden-flower { position: absolute; width: clamp(2rem, 5vw, 4.5rem); opacity: var(--flower-opacity, .11); overflow: visible; filter: drop-shadow(0 0 7px rgb(var(--accent) / .25)); animation: flower-drift 27s ease-in-out infinite alternate; transition: opacity .8s ease, filter .5s ease; }
+.garden-flower-petals path { fill: rgb(var(--accent) / .12); stroke: rgb(var(--accent-2) / .58); stroke-width: 1.1; transition: fill .6s ease, stroke .6s ease; }
+.garden-flower-center { fill: rgb(var(--accent) / .36); stroke: rgb(var(--accent-2) / .62); stroke-width: 1; transition: fill .6s ease; }
+.garden-flower-core { fill: rgb(var(--accent-2) / .82); }
+.garden-flower-1 { top: 30%; left: 4%; translate: 0 var(--scroll-left, 0px); }
+.garden-flower-2 { top: 56%; right: 5%; width: clamp(2.5rem, 6vw, 5rem); translate: 0 var(--scroll-right, 0px); animation-delay: -8s; }
+.garden-flower-3 { bottom: 8%; left: 18%; width: clamp(1.8rem, 3.4vw, 3rem); translate: 0 var(--scroll-left, 0px); animation-delay: -17s; }
+.garden-flower-4 { top: 12%; right: 22%; width: clamp(1.7rem, 3.2vw, 2.7rem); translate: 0 var(--scroll-right, 0px); animation-delay: -12s; }
+.garden-trails .garden-circuit { stroke: rgb(145 144 192 / .12); stroke-width: 1; stroke-dasharray: 2 9; stroke-linecap: round; stroke-linejoin: round; animation: trail-glide 68s linear infinite; }
+.garden-trails .garden-circuit-node { fill: rgb(174 157 215 / .45); filter: drop-shadow(0 0 4px rgb(174 157 215 / .42)); }
+:root[data-theme="light"] .garden-flower { filter: drop-shadow(0 0 5px rgb(var(--accent) / .16)); }
+:root[data-theme="light"] .garden-flower-petals path { fill: rgb(var(--accent) / .08); stroke: rgb(var(--accent-2) / .48); }
+.ambient-garden[data-page="home"] .garden-flower { filter: drop-shadow(0 0 9px rgb(var(--accent-2) / .29)); }
+@keyframes flower-drift { from { transform: translate3d(0,2px,0) rotate(-3deg) scale(.96); } to { transform: translate3d(4px,-7px,0) rotate(3deg) scale(1.03); } }
+@media (prefers-reduced-motion: reduce) { .garden-rays { animation: none !important; } }
 
 /* Crystal A signature, shared with the existing emblem asset. */
 .abique-mark { position: relative; display: inline-grid; flex: 0 0 auto; place-items: center; vertical-align: middle; isolation: isolate; animation: mark-breathe 6.5s ease-in-out infinite; }
@@ -471,15 +487,46 @@ html[data-intro-pending] :focus-visible { position: relative; z-index: 214748260
 .pointer-ambience { position: fixed; z-index: 40; inset: 0; overflow: visible; pointer-events: none; }
 .pointer-ambience-light { position: fixed; top: 0; left: 0; width: 14rem; height: 14rem; opacity: 0; border-radius: 50%; background: radial-gradient(circle, rgb(var(--accent-2) / .12), rgb(var(--accent) / .055) 30%, transparent 70%); mix-blend-mode: screen; pointer-events: none; transition: opacity .25s ease; will-change: transform; }
 .pointer-ambience-light.is-visible { opacity: .85; }
-.pointer-ambience-ripple { position: fixed; top: -100px; left: -100px; width: 2.5rem; height: 2.5rem; border: 1px solid rgb(var(--accent-2) / .6); border-radius: 50%; background: radial-gradient(circle, rgb(var(--accent-2) / .17), transparent 70%); box-shadow: 0 0 16px rgb(var(--accent) / .25); }
 :root[data-theme="light"] .pointer-ambience-light { mix-blend-mode: multiply; background: radial-gradient(circle, rgb(var(--accent-2) / .12), rgb(var(--accent) / .06) 30%, transparent 70%); }
 :root[data-theme="light"] .garden-pointer-glow { background: radial-gradient(circle, rgb(var(--accent-2) / .07), rgb(var(--accent) / .04) 28%, transparent 68%); }
+.journey-label { letter-spacing: .12em; font-size: .64rem; font-weight: 700; color: rgb(var(--ink) / .88); }
+.journey-leaf { filter: drop-shadow(0 0 4px rgb(var(--good) / .56)); animation: leaf-glimmer 4s ease-in-out infinite alternate; }
+.portrait-stage { position: relative; isolation: isolate; perspective: 800px; overflow: visible; }
+.portrait-image, .portrait-placeholder { position: relative; z-index: 1; display: block; width: 100%; height: 100%; transition: transform .38s cubic-bezier(.2,.7,.25,1), border-color .35s ease, box-shadow .35s ease; }
+.portrait-stage:hover .portrait-image, .portrait-stage:hover .portrait-placeholder { transform: translateY(-4px) rotateY(-1.5deg); border-color: rgb(var(--accent-2) / .78); box-shadow: 0 15px 35px rgb(0 0 0 / .2), 0 0 24px rgb(var(--accent) / .16); }
+.portrait-light { position: absolute; z-index: 2; width: 3px; height: 3px; border-radius: 50%; opacity: .6; background: #b4d5ad; box-shadow: 0 0 5px 2px rgb(145 190 143 / .42), 0 0 12px rgb(164 207 158 / .22); pointer-events: none; transition: top .45s ease, right .45s ease, bottom .45s ease, left .45s ease, opacity .35s ease, transform .45s ease; animation: portrait-firefly 6s ease-in-out infinite alternate; }
+.portrait-light-one { top: 14%; left: -7px; }
+.portrait-light-two { top: 37%; right: -8px; width: 2px; height: 2px; animation-delay: -2.5s; }
+.portrait-light-three { bottom: 24%; left: -5px; width: 2px; height: 2px; animation-delay: -4s; }
+.portrait-light-four { right: 13%; bottom: 8%; animation-delay: -1.3s; }
+.portrait-stage:hover .portrait-light-one { top: 18%; left: 12%; }
+.portrait-stage:hover .portrait-light-two { top: 37%; right: 12%; }
+.portrait-stage:hover .portrait-light-three { bottom: 24%; left: 14%; }
+.portrait-stage:hover .portrait-light-four { right: 18%; bottom: 14%; }
+.firefly-tone-3 { --particle-color: #a9c9a6; }
+.garden-trails .garden-circuit { stroke: rgb(132 163 145 / .13); }
+.garden-trails .garden-circuit-node { fill: rgb(153 187 148 / .4); filter: drop-shadow(0 0 4px rgb(153 187 148 / .28)); }
+.card-hover:has(.project-preview):hover { box-shadow: 0 0 0 1px rgb(var(--accent) / .08), 0 12px 28px rgb(var(--accent-2) / .08), 0 0 16px rgb(var(--accent) / .025); }
+.garden-clover { position: absolute; z-index: 2; left: 50%; bottom: -16vh; width: clamp(24rem, 74vw, 62rem); height: min(84vh, 52rem); overflow: visible; opacity: .3; pointer-events: none; transform: translateX(-50%); filter: drop-shadow(0 0 14px rgb(80 107 86 / .06)); }
+.clover-leaf { fill: rgb(23 31 30 / .88); stroke: rgb(113 129 121 / .2); stroke-width: 1.4; }
+.clover-stem { fill: none; stroke: rgb(76 99 82 / .38); stroke-width: 3; stroke-linecap: round; }
+.clover-vein { fill: none; stroke: rgb(151 134 159 / .15); stroke-width: 1.1; stroke-linecap: round; }
+.clover-dewdrop { fill: rgb(163 143 171 / .5); filter: drop-shadow(0 0 4px rgb(144 124 151 / .16)); }
+:root[data-theme="light"] .garden-clover { opacity: .13; filter: drop-shadow(0 0 12px rgb(91 111 91 / .06)); }
+:root[data-theme="light"] .clover-leaf { fill: rgb(62 70 67 / .42); stroke: rgb(103 81 118 / .2); }
+:root[data-theme="light"] .clover-stem { stroke: rgb(81 99 86 / .3); }
+:root[data-theme="light"] .clover-vein { stroke: rgb(114 83 130 / .18); }
+@keyframes leaf-glimmer { from { opacity: .76; transform: rotate(-7deg) scale(.92); } to { opacity: 1; transform: rotate(5deg) scale(1.04); } }
+@keyframes portrait-firefly { from { opacity: .3; transform: translate3d(-2px,2px,0); } to { opacity: .8; transform: translate3d(2px,-4px,0); } }
+@media (prefers-reduced-motion: reduce) { .journey-leaf, .portrait-light { animation: none !important; }.portrait-stage:hover .portrait-image, .portrait-stage:hover .portrait-placeholder { transform: none; } }
 @keyframes mark-breathe { 0%, 100% { filter: drop-shadow(0 0 0 rgb(var(--accent-2) / 0)); } 50% { filter: drop-shadow(0 0 5px rgb(var(--accent-2) / .19)); } }
 @keyframes mark-orbit { from { transform: rotate(0deg) translateX(3px) rotate(0deg); } to { transform: rotate(360deg) translateX(3px) rotate(-360deg); } }
 @media (hover: none), (pointer: coarse) { .garden-pointer-glow, .pointer-ambience { display: none; } }
 @media (max-width: 640px) { .pointer-ambience-light { width: 10rem; height: 10rem; } }
+@media (max-width: 640px) { .garden-clover { bottom: -12vh; width: 115vw; height: 92vh; opacity: .24; } :root[data-theme="light"] .garden-clover { opacity: .11; } }
 @media (prefers-reduced-motion: reduce) {
-  .garden-vine, .firefly, .brand-signature::before, .brand-signature::after, .coreIcon::after, .home-hero::after, .page-atmosphere::after, .abique-mark, .abique-mark-star { animation: none !important; }
+  .firefly, .brand-signature::before, .brand-signature::after, .coreIcon::after, .home-hero::after, .page-atmosphere::after, .abique-mark, .abique-mark-star { animation: none !important; }
+  .garden-flower { animation: none !important; }
   .pointer-ambience, .garden-pointer-glow { display: none !important; }
   .scroll-reveal-pending { opacity: 1; transform: none; filter: none; }
   .loading-intro { display: none; }
